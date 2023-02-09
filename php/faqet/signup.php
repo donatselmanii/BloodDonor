@@ -10,9 +10,8 @@ if (isset($_POST['submit'])) {
 
   $Modeli->setEmail($_POST['email']);
 
-  $kontrollimiemailit = $Modeli->$kontrollimiemailit();
-  $kontrollimileternjoftimit = $Modeli->$kontrollimiemailit();
-  if ($kontrollimiemailit == true && $kontrollimileternjoftimit==true) {
+  $kontrollo = $Modeli->$kontrollo();
+  if ($kontrollo == true) {
     $_SESSION['emailEkziston'] = true;
     $_SESSION['nrleternjoftimitEkziston'] = true;
     $_SESSION['nrleternjoftimit'] = $_POST['nrleternjoftimit'];
@@ -85,7 +84,7 @@ if (isset($_POST['submit'])) {
                 <option value="Bpozitiv">B+</option>
                 <option value="Bnegativ">B-</option>
                 </select>
-                <button onclick="Valido()" class="signup-button">Sign Up</button>
+                <input type="submit" onclick="Valido()" name="submit"class="signup-button">Sign Up</button>
                 <a href="login.php">Log In.</a>
             </div>
         </div>

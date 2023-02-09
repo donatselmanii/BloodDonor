@@ -17,7 +17,7 @@ private $pershkrimi;
 private $aksesi; 
 private $email;
 private $password;
-private $numri
+private $numri;
 private $dbConn;
 public function __construct($id='', $nrleternjoftimit='', $emri='', $mbiemri='', $datelindja='', $grupi='', $adresa='', $semundjet='',$pershkrimi='',$aksesi='',$email='',$password='',$numri='', $dbConn='') {
     $this->id = $id;
@@ -126,7 +126,7 @@ public function setPassword($password){
 public function getNumri(){
     return $numri;
 }
-public function setPassword($numri){
+public function setNumri($numri){
     $this->numri=$numri;
 }
 //Metoda per insertim Dhenave
@@ -161,30 +161,18 @@ public function insertotherData($grupi, $semundjet,$pershkrimi){
     
 
     
-    public function kontrollimiemailit()
-    {
+    public function kontrollo(){
         try {
-            $sql = 'SELECT * from Donator WHERE email = ?';
+            $sql = 'SELECT * from Donator WHERE email = ?, nrleternjoftimit=?';
             $stm = $this->dbcon->prepare($sql);
-            $stm->execute([$this->email]);
+            $stm->execute([$this->email,$this->nrleternjoftimit]);
 
             return $stm->fetch();
         } catch (Exception $e) {
             return $e->getMessage();
         }
     }
-    public function kontrollimileternjoftimit()
-    {
-        try {
-            $sql = 'SELECT * from Donator WHERE nrleternjoftimit = ?';
-            $stm = $this->dbcon->prepare($sql);
-            $stm->execute([$this->nrleternjoftimit]);
-
-            return $stm->fetch();
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }
+    
     
     public function kontrolloLlogarin()
     {
