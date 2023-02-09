@@ -1,5 +1,5 @@
 <?php
-require_once('Modeli.php');
+require_once('../CRUD/Modeli.php');
 
 if (!isset($_SESSION)) {
     session_start();
@@ -21,14 +21,18 @@ if (isset($_POST['login'])) {
             $_SESSION['emri'] = $kontrolloLlogarin['emri'];
             $_SESSION['mbiemri'] = $kontrolloLlogarin['mbiemri'];
             $_SESSION['email'] = $kontrolloLlogarin['email'];
-            echo "<script>document.location='blood-donor.php'</script>";
+            echo "<script>document.location='../faqet/blood-donor.php'</script>";
         } else {
-            $_SESSION['passGabim'] = true;
-            echo "<script>document.location='login.php'</script>";
+            $_SESSION['PasswordGabim'] = true;
+            echo "<script>
+            document.location='../faqet/login.php';
+            </script>";
         }
     } else {
-        $_SESSION['uNameGabim'] = true;
-        echo "<script>document.location='login.php'</script>";
+        $_SESSION['EmailGabim'] = true;
+        echo "<script>
+        document.location='../faqet/login.php';
+        </script>";
     }
 }
 ?>

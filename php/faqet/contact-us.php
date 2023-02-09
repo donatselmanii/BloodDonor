@@ -1,3 +1,8 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,18 +10,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Na Kontaktoni</title>
-    <link rel="icon" href="../img/logo.png" type="image/icon">
-    <link rel="stylesheet" href="../css/blood-donor.css">
+    <link rel="icon" href="../../img/logo.png" type="image/icon">
+    <link rel="stylesheet" href="../../css/blood-donor.css">
     <script src="https://kit.fontawesome.com/7be85ed243.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-other">
-       <div class="logo"><a href="blood-donor.html"><img src="../img/logo.png" alt=""></a></div>
+       <div class="logo"><a href="blood-donor.php"><img src="../../img/logo.png" alt=""></a></div>
        <ul>
-        <li><a href="why-you-should-donate.html"> Pse duhet të dhuroni gjak </a></li>
-        <li><a href="about-us.html">Rreth nesh </a></li>
-        <li><a href="contact-us.html"> Na kontaktoni </a></li>
-        <li><a href="login.html"> <i class="fa-solid fa-user"></i> </a></li>
+        <li><a href="why-you-should-donate.php"> Pse duhet të dhuroni gjak </a></li>
+        <li><a href="about-us.php">Rreth nesh </a></li>
+        <li><a href="contact-us.php"> Na kontaktoni </a></li>
+        <li><a href="login.php"> <i class="fa-solid fa-user"></i> </a></li>
        </ul>
     </nav>
 

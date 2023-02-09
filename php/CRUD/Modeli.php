@@ -1,5 +1,5 @@
 <?php
-require_once('dbcon.php');
+require_once('../db/dbcon.php');
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -17,8 +17,9 @@ private $pershkrimi;
 private $aksesi; 
 private $email;
 private $password;
+private $numri
 private $dbConn;
-public function __construct($id='', $nrleternjoftimit='', $emri='', $mbiemri='', $datelindja='', $grupi='', $adresa='', $semundjet='',$pershkrimi='',$aksesi='',$email='',$password='', $dbConn='') {
+public function __construct($id='', $nrleternjoftimit='', $emri='', $mbiemri='', $datelindja='', $grupi='', $adresa='', $semundjet='',$pershkrimi='',$aksesi='',$email='',$password='',$numri='', $dbConn='') {
     $this->id = $id;
     $this->nrleternjoftimit = $nrleternjoftimit;
     $this->emri = $emri;
@@ -31,6 +32,7 @@ public function __construct($id='', $nrleternjoftimit='', $emri='', $mbiemri='',
     $this->aksesi=$aksesi;
     $this->email=$email;
     $this->password=$password;
+    $this->numri=$numri;
     $this->dbcon = $this->connDB();
 }
 //Seters and geters
@@ -121,22 +123,29 @@ public function getPassword(){
 public function setPassword($password){
     $this->password=$password;
 }
+public function getNumri(){
+    return $numri;
+}
+public function setPassword($numri){
+    $this->numri=$numri;
+}
 //Metoda per insertim Dhenave
 public function insertoDhenat(){
 try{
-    $sql = "INSERT INTO Donator(nrleternjoftimit,emri,mbiemri,email,datelindja,adresa) value(?,?,?,?,?)";
+    $sql = "INSERT INTO Donator(nrleternjoftimit,emri,mbiemri,datelindja,numri,email,passwordi,adresa) value(?,?,?,?,?,?,?,?)";
     $stm = $this->dbcon->prepare($sql);
-    $stm->execute([$this->nrleternjoftimit, $this->emri, $this->mbiemri,$this->email, $this->datelindja, $this->adresa]);
+    $stm->execute([$this->nrleternjoftimit, $this->emri, $this->mbiemri,$this->datelindja,$this->numri,$this->email,$this->passwordi, $this->datelindja, $this->adresa]);
     echo "<script>
     alert('te dhenat jane regjistruar me sukses');
     </script>";
+    $_SESSION['regMeSukses'] = true;
 }
     catch(Exception $e){
     return $e->getMessage();
         }
 }
 // Inserto te dhenat tjera pas te dhenave te para 
-public function insertotherData($grupi='', $semundjet='',$pershkrimi=''){
+public function insertotherData($grupi, $semundjet,$pershkrimi){
     try{
     $sql = "UPDATE Donator SET grupi = ?, semundjet = ?, pershkrimi = ? WHERE nrleternjoftimit = ?";
     $stm = $this->dbcon->prepare($sql);
@@ -152,12 +161,24 @@ public function insertotherData($grupi='', $semundjet='',$pershkrimi=''){
     
 
     
-    public function kontrolloUser()
+    public function kontrollimiemailit()
     {
         try {
             $sql = 'SELECT * from Donator WHERE email = ?';
             $stm = $this->dbcon->prepare($sql);
             $stm->execute([$this->email]);
+
+            return $stm->fetch();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+    public function kontrollimileternjoftimit()
+    {
+        try {
+            $sql = 'SELECT * from Donator WHERE nrleternjoftimit = ?';
+            $stm = $this->dbcon->prepare($sql);
+            $stm->execute([$this->nrleternjoftimit]);
 
             return $stm->fetch();
         } catch (Exception $e) {

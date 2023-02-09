@@ -1,3 +1,8 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In</title>
     <link rel="icon" href="../img/icon.png" type="image/icon">
-    <link rel="stylesheet" href="../css/blood-donor.css">
+    <link rel="stylesheet" href="../../css/blood-donor.css">
     <script src="https://kit.fontawesome.com/7be85ed243.js"></script>
 </head>
 <body class="login-body">
@@ -14,26 +19,16 @@
         <div class="login-box">
             <div class="login-box-inside">
                 <h2>Log In</h2>
-                <form name="LoginForm" onsubmit="return validimiLogin();" action='loginUser.php' method="POST">
+                <form name="LoginForm" onsubmit="Valido();" action='../funksione/loginUser.php' method="POST">
       <?php
-      if (isset($_SESSION['passGabim'])) {
+      if (isset($_SESSION['PasswordGabim'])) {
         echo '
-                  <div class="mesazhiGabimStyle">
-                    <h3>Keni shenuar passwordin gabim!</h3>
-                    <button id="mbyllMesazhin">
-                      X
-                    </button>
-                  </div>
+                  <script>alert("Passwordi eshte gabim!");</script>
             ';
       }
-      if (isset($_SESSION['uNameGabim'])) {
+      if (isset($_SESSION['EmailGabim'])) {
         echo '
-                  <div class="mesazhiGabimStyle">
-                    <h3>Ky username nuk egziston!</h3>
-                    <button id="mbyllMesazhin">
-                      X
-                    </button>
-                  </div>
+        <p>Email eshte gabim dhe kjo eshte paragraf</p>
             ';
       }
       ?>
@@ -41,7 +36,7 @@
       <input type="password" name="password" class="field" placeholder="Your Password">
       <div class="reg">
         <p>Don't have an account? <a href="signup.php">Sign Up</a></p>
-        <input class="button" type="submit" name="login">
+        <input class="button" onclick="Valido();" type="submit" name="login">
       </div>
       
                 
@@ -52,9 +47,9 @@
     </section>
 </body>
 </html>
-
+<?php include_once('../funskione/skriptat.php'); ?>
 
 <?php
-unset($_SESSION['passGabim']);
-unset($_SESSION['uNameGabim']);
+unset($_SESSION['EmailGabim']);
+unset($_SESSION['PasswordGabim']);
 ?>
