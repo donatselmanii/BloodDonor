@@ -9,19 +9,11 @@ if (isset($_POST['submit'])) {
   $Modeli = new Modeli();
 
   $Modeli->setEmail($_POST['email']);
-
-  $kontrollo = $Modeli->$kontrollo();
+  $Modeli->setNrleternjoftimit($_POST['nrleternjoftimit']);
+  $kontrollo = $Modeli->kontrollo();
   if ($kontrollo == true) {
     $_SESSION['emailEkziston'] = true;
     $_SESSION['nrleternjoftimitEkziston'] = true;
-    $_SESSION['nrleternjoftimit'] = $_POST['nrleternjoftimit'];
-    $_SESSION['emri'] = $_POST['emri'];
-    $_SESSION['mbiemri'] = $_POST['mbiemri'];
-    $_SESSION['email'] = $_POST['email'];
-    $_SESSION['numri'] = $_POST['numri'];
-    $_SESSION['datelindja'] = $_POST['datelindja'];
-    $_SESSION['adresa'] = $_POST['adresa'];
-    $_SESSION['passwordi'] = $_POST['passwordi'];
   } else {
     $Modeli->setNrleternjoftimit($_POST['nrleternjoftimit']);
     $Modeli->setEmri($_POST['emri']);
@@ -31,6 +23,7 @@ if (isset($_POST['submit'])) {
     $Modeli->setPassword($_POST['password']);
 
     $Modeli->insertoDhenat();
+    session_destroy();
     session_destroy();
   }
 }

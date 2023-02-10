@@ -19,7 +19,7 @@ private $email;
 private $password;
 private $numri;
 private $dbConn;
-public function __construct($id='', $nrleternjoftimit='', $emri='', $mbiemri='', $datelindja='', $grupi='', $adresa='', $semundjet='',$pershkrimi='',$aksesi='',$email='',$password='',$numri='', $dbConn='') {
+public function __construct($id='', $nrleternjoftimit='', $emri='', $mbiemri='', $datelindja='', $grupi='', $adresa='', $semundjet='',$pershkrimi='',$aksesi='',$email='',$passwordi='',$numri='', $dbConn='') {
     $this->id = $id;
     $this->nrleternjoftimit = $nrleternjoftimit;
     $this->emri = $emri;
@@ -31,7 +31,7 @@ public function __construct($id='', $nrleternjoftimit='', $emri='', $mbiemri='',
     $this->pershkrimi=$pershkrimi;
     $this->aksesi=$aksesi;
     $this->email=$email;
-    $this->password=$password;
+    $this->passwordi=$passwordi;
     $this->numri=$numri;
     $this->dbcon = $this->connDB();
 }
@@ -118,10 +118,10 @@ public function setEmail($email){
     $this->email=$email;
 }
 public function getPassword(){
-    return $password;
+    return $passwordi;
 }
-public function setPassword($password){
-    $this->password=$password;
+public function setPassword($passwordi){
+    $this->passwordi=$passwordi;
 }
 public function getNumri(){
     return $numri;
@@ -129,15 +129,16 @@ public function getNumri(){
 public function setNumri($numri){
     $this->numri=$numri;
 }
+
+
+
 //Metoda per insertim Dhenave
 public function insertoDhenat(){
 try{
     $sql = "INSERT INTO Donator(nrleternjoftimit,emri,mbiemri,datelindja,numri,email,passwordi,adresa) value(?,?,?,?,?,?,?,?)";
     $stm = $this->dbcon->prepare($sql);
-    $stm->execute([$this->nrleternjoftimit, $this->emri, $this->mbiemri,$this->datelindja,$this->numri,$this->email,$this->passwordi, $this->datelindja, $this->adresa]);
-    echo "<script>
-    alert('te dhenat jane regjistruar me sukses');
-    </script>";
+    $stm->execute([$this->nrleternjoftimit, $this->emri, $this->mbiemri,$this->datelindja,$this->numri,$this->email,$this->passwordi, $this->adresa]);
+    
     $_SESSION['regMeSukses'] = true;
 }
     catch(Exception $e){
@@ -163,7 +164,7 @@ public function insertotherData($grupi, $semundjet,$pershkrimi){
     
     public function kontrollo(){
         try {
-            $sql = 'SELECT * from Donator WHERE email = ?, nrleternjoftimit=?';
+            $sql = 'SELECT * from Donator WHERE email = ?, nrleternjoftimit= ?';
             $stm = $this->dbcon->prepare($sql);
             $stm->execute([$this->email,$this->nrleternjoftimit]);
 
@@ -177,7 +178,7 @@ public function insertotherData($grupi, $semundjet,$pershkrimi){
     public function kontrolloLlogarin()
     {
         try {
-            $sql = 'SELECT * from Donator WHERE email = ? and password = ?';
+            $sql = 'SELECT * from Donator WHERE email = ? and passwordi = ?';
             $stm = $this->dbcon->prepare($sql);
             $stm->execute([$this->email, $this->password]);
 
