@@ -26,13 +26,13 @@ if (!isset($_SESSION)) {
                   <script>alert("Passwordi eshte gabim!");</script>
             ';
       }
-      if (isset($_SESSION['EmailGabim'])) {
+      if (isset($_SESSION['nrleternjoftimitGabim'])) {
         echo '
-        <p>Email eshte gabim dhe kjo eshte paragraf</p>
+        <p>Numri Leternjoftimit eshte gabim dhe kjo eshte paragraf</p>
             ';
       }
       ?>
-      <input type="email" name="email" class="field" placeholder="Your Email">
+      <input type="text" name="nrleternjoftimit" class="field" placeholder="Your Id">
       <input type="password" name="password" class="field" placeholder="Your Password">
       <div class="reg">
         <p>Don't have an account? <a href="signup.php">Sign Up</a></p>
@@ -50,6 +50,6 @@ if (!isset($_SESSION)) {
 <?php include_once('../funskione/skriptat.php'); ?>
 
 <?php
-unset($_SESSION['EmailGabim']);
+unset($_SESSION['nrleternjoftimitGabim']);
 unset($_SESSION['PasswordGabim']);
 ?>

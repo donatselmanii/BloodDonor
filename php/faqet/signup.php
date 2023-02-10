@@ -8,23 +8,21 @@ require('../CRUD/Modeli.php');
 if (isset($_POST['submit'])) {
   $Modeli = new Modeli();
 
-  $Modeli->setEmail($_POST['email']);
   $Modeli->setNrleternjoftimit($_POST['nrleternjoftimit']);
+
   $kontrollo = $Modeli->kontrollo();
-  if ($kontrollo == true) {
-    $_SESSION['emailEkziston'] = true;
+  if ($kontrollo==true) {
     $_SESSION['nrleternjoftimitEkziston'] = true;
   } else {
     $Modeli->setNrleternjoftimit($_POST['nrleternjoftimit']);
     $Modeli->setEmri($_POST['emri']);
     $Modeli->setMbiemri($_POST['mbiemri']);
-    $Modeli->setEmail($_POST['email']);
     $Modeli->setNumri($_POST['numri']);
     $Modeli->setPassword($_POST['password']);
 
     $Modeli->insertoDhenat();
     session_destroy();
-    session_destroy();
+    
   }
 }
 
@@ -62,9 +60,7 @@ if (isset($_POST['submit'])) {
                 <input name="nrleternjoftimit" id="id" type="id" class="field" placeholder="Your ID">
                 <input name="emri" id="emri" type="text" class="field" placeholder="First Name">
                 <input name="mbiemri" id="mbiemri" type="text" class="field" placeholder="Last Name">
-                <input name="email" id="email" type="email" class="field" placeholder="Your Email">
                 <input name="numri" id="numri" type="number" class="field" placeholder="Your Number">
-                <input name="datelindja" id="datelindja" type="date" class="field" placeholder="Your birthday">
                 <input name="adresa" id="adress" type="text" class="field" placeholder="Your Address">
                 <input name="password" id="password" type="password" maxlength="15" class="field" placeholder="Password">
                 <p>Grupi i gjakut</p>

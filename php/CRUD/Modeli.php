@@ -135,9 +135,9 @@ public function setNumri($numri){
 //Metoda per insertim Dhenave
 public function insertoDhenat(){
 try{
-    $sql = "INSERT INTO Donator(nrleternjoftimit,emri,mbiemri,datelindja,numri,email,passwordi,adresa) value(?,?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO Donator(nrleternjoftimit,emri,mbiemri,numri,passwordi,adresa) value(?,?,?,?,?,?,)";
     $stm = $this->dbcon->prepare($sql);
-    $stm->execute([$this->nrleternjoftimit, $this->emri, $this->mbiemri,$this->datelindja,$this->numri,$this->email,$this->passwordi, $this->adresa]);
+    $stm->execute([$this->nrleternjoftimit, $this->emri, $this->mbiemri,$this->numri,$this->passwordi, $this->adresa]);
     
     $_SESSION['regMeSukses'] = true;
 }
@@ -162,11 +162,12 @@ public function insertotherData($grupi, $semundjet,$pershkrimi){
     
 
     
+    
     public function kontrollo(){
         try {
-            $sql = 'SELECT * from Donator WHERE email = ?, nrleternjoftimit= ?';
+            $sql = 'SELECT * from Donator WHERE nrleternjoftimit = ?';
             $stm = $this->dbcon->prepare($sql);
-            $stm->execute([$this->email,$this->nrleternjoftimit]);
+            $stm->execute([$this->nrleternjoftimit]);
 
             return $stm->fetch();
         } catch (Exception $e) {
@@ -174,13 +175,12 @@ public function insertotherData($grupi, $semundjet,$pershkrimi){
         }
     }
     
-    
     public function kontrolloLlogarin()
     {
         try {
-            $sql = 'SELECT * from Donator WHERE email = ? and passwordi = ?';
+            $sql = 'SELECT * from Donator WHERE nrleternjoftimit = ? and passwordi = ?';
             $stm = $this->dbcon->prepare($sql);
-            $stm->execute([$this->email, $this->password]);
+            $stm->execute([$this->nrleternjoftimit, $this->password]);
 
             return $stm->fetch();
         } catch (Exception $e) {

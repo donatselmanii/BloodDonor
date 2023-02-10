@@ -7,11 +7,11 @@ if (!isset($_SESSION)) {
 
 if (isset($_POST['login'])) {
     $Modeli = new Modeli();
-    $Modeli->setEmail($_POST['email']);
-    $kontrolloUser = $Modeli->kontrolloUser();
+    $Modeli->setNrleternjoftimit($_POST['nrleternjoftimit']);
+    $kontrollo = $Modeli->kontrollo();
 
 
-    if ($kontrolloUser == true) {
+    if ($kontrollo == true) {
         $Modeli->setPassword($_POST['password']);
         $kontrolloLlogarin = $Modeli->kontrolloLlogarin();
 
@@ -29,7 +29,7 @@ if (isset($_POST['login'])) {
             </script>";
         }
     } else {
-        $_SESSION['EmailGabim'] = true;
+        $_SESSION['nrleternjoftimitGabim'] = true;
         echo "<script>
         document.location='../faqet/login.php';
         </script>";
