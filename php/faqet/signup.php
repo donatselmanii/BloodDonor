@@ -13,15 +13,18 @@ if (isset($_POST['submit'])) {
   $kontrollo = $Modeli->kontrollo();
   if ($kontrollo==true) {
     $_SESSION['nrleternjoftimitEkziston'] = true;
+    session_destroy();
   } else {
     $Modeli->setNrleternjoftimit($_POST['nrleternjoftimit']);
     $Modeli->setEmri($_POST['emri']);
     $Modeli->setMbiemri($_POST['mbiemri']);
     $Modeli->setNumri($_POST['numri']);
-    $Modeli->setPassword($_POST['password']);
+    $Modeli->setAdresa($_POST['adresa']);
+    $Modeli->setPasswordi($_POST['passwordi']);
 
     $Modeli->insertoDhenat();
     session_destroy();
+    
     
   }
 }
@@ -52,32 +55,32 @@ if (isset($_POST['submit'])) {
       if (isset($_SESSION['emailkziston'])) {
         echo '<script>alert("Email ekziston");</script>';
       }
-      if (isset($_SESSION['nrleternjoftimitEkziston'])) {
+      elseif(isset($_SESSION['nrleternjoftimitEkziston'])) {
         echo '<script>alert("Numri leternjoftimit ekziston");</script>';
       }
-      ?>
+      ?>         
+                
                 <h2>Sign Up</h2>
                 <input name="nrleternjoftimit" id="id" type="id" class="field" placeholder="Your ID">
                 <input name="emri" id="emri" type="text" class="field" placeholder="First Name">
                 <input name="mbiemri" id="mbiemri" type="text" class="field" placeholder="Last Name">
                 <input name="numri" id="numri" type="number" class="field" placeholder="Your Number">
                 <input name="adresa" id="adress" type="text" class="field" placeholder="Your Address">
-                <input name="password" id="password" type="password" maxlength="15" class="field" placeholder="Password">
-                <p>Grupi i gjakut</p>
-                <select id="group">
-                <option value="0negativ">Grupi</option>   
-                <option value="0negativ">0+</option>
-                <option value="0pozitiv">0-</option>
-                <option value="Apozitiv">A+</option>
-                <option value="Anegativ">A-</option>
-                <option value="Bpozitiv">B+</option>
-                <option value="Bnegativ">B-</option>
-                </select>
-                <input type="submit" onclick="Valido()" name="submit"class="signup-button">Sign Up</button>
+                <input name="passwordi" id="passwordi" type="password"  class="field" placeholder="Password">
+                
+                
+                
+                <input type="submit" onclick="" name="submit"class="signup-button"value="Sign Up">
                 <a href="login.php">Log In.</a>
-            </div>
-        </div>
+                </form>
+       
     </section>
     <script src="../../js/regex.js"></script>
 </body>
 </html>
+
+<?php
+unset($_SESSION['regMeSukses']);
+unset($_SESSION['nrleternjoftimitEkziston']);
+?>
+

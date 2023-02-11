@@ -1,5 +1,5 @@
 <?php
-Class dbCon{
+Class dbcon{
 private $conn = null;
 private $host = 'localhost';
 private $dbname = 'blooddonortest';

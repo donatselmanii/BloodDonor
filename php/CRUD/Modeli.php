@@ -16,7 +16,7 @@ private $semundjet;
 private $pershkrimi;
 private $aksesi; 
 private $email;
-private $password;
+private $passwordi;
 private $numri;
 private $dbConn;
 public function __construct($id='', $nrleternjoftimit='', $emri='', $mbiemri='', $datelindja='', $grupi='', $adresa='', $semundjet='',$pershkrimi='',$aksesi='',$email='',$passwordi='',$numri='', $dbConn='') {
@@ -117,10 +117,10 @@ public function getEmail(){
 public function setEmail($email){
     $this->email=$email;
 }
-public function getPassword(){
+public function getPasswordi(){
     return $passwordi;
 }
-public function setPassword($passwordi){
+public function setPasswordi($passwordi){
     $this->passwordi=$passwordi;
 }
 public function getNumri(){
@@ -135,20 +135,32 @@ public function setNumri($numri){
 //Metoda per insertim Dhenave
 public function insertoDhenat(){
 try{
-    $sql = "INSERT INTO Donator(nrleternjoftimit,emri,mbiemri,numri,passwordi,adresa) value(?,?,?,?,?,?,)";
+    $sql = "INSERT INTO 'donator' ('nrleternjoftimit','emri','mbiemri','numri','adresa','passwordi') value(?,?,?,?,?,?,)";
     $stm = $this->dbcon->prepare($sql);
-    $stm->execute([$this->nrleternjoftimit, $this->emri, $this->mbiemri,$this->numri,$this->passwordi, $this->adresa]);
+    $stm->execute([$this->nrleternjoftimit, $this->emri, $this->mbiemri,$this->numri, $this->adresa, $this->passwordi]);
     
     $_SESSION['regMeSukses'] = true;
 }
     catch(Exception $e){
     return $e->getMessage();
         }
-}
+} public function shtoUser()
+    {
+        try {
+            $sql = "INSERT INTO `user`(`emri`, `mbiemri`, `username`, `email`, `password`) VALUES (?,?,?,?,?)";
+            $stm = $this->dbConn->prepare($sql);
+            $stm->execute([$this->emri, $this->mbiemri, $this->username, $this->email, $this->password]);
+
+            $_SESSION['regMeSukses'] = true;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
 // Inserto te dhenat tjera pas te dhenave te para 
 public function insertotherData($grupi, $semundjet,$pershkrimi){
     try{
-    $sql = "UPDATE Donator SET grupi = ?, semundjet = ?, pershkrimi = ? WHERE nrleternjoftimit = ?";
+    $sql = "UPDATE donator SET grupi = ?, semundjet = ?, pershkrimi = ? WHERE nrleternjoftimit = ?";
     $stm = $this->dbcon->prepare($sql);
     $stm->execute([$grupi, $semundjet, $pershkrimi, $this->nrleternjoftimit]);
     echo "<script>

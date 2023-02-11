@@ -28,7 +28,7 @@ if (!isset($_SESSION)) {
       }
       if (isset($_SESSION['nrleternjoftimitGabim'])) {
         echo '
-        <p>Numri Leternjoftimit eshte gabim dhe kjo eshte paragraf</p>
+        <script>alert("Passwordi eshte gabim!");</script>
             ';
       }
       ?>
