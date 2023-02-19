@@ -16,7 +16,7 @@ if (!isset($_SESSION)) {
 </head>
 <body>
     <nav class="navbar navbar-other">
-        <div class="logo"><a href="blood-donor.php"><img src="../../img/logo.png" alt="foto"></a></div>
+        <div class="logo"><a href="index.php"><img src="../../img/logo.png" alt="foto"></a></div>
         <ul>
             <li><a href="why-you-should-donate.php"> Pse duhet të dhuroni gjak </a></li>
             <li><a href="about-us.php">Rreth nesh </a></li>

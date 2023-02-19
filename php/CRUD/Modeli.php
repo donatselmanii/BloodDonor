@@ -135,7 +135,7 @@ public function setNumri($numri){
 //Metoda per insertim Dhenave
 public function insertoDhenat(){
 try{
-    $sql = "INSERT INTO 'donator' ('nrleternjoftimit','emri','mbiemri','numri','adresa','passwordi') value(?,?,?,?,?,?,)";
+    $sql = "INSERT INTO `donator` (`nrleternjoftimit`,`emri`,`mbiemri`,`numri`,`adresa`,`passwordi`) VALUES(?,?,?,?,?,? )";
     $stm = $this->dbcon->prepare($sql);
     $stm->execute([$this->nrleternjoftimit, $this->emri, $this->mbiemri,$this->numri, $this->adresa, $this->passwordi]);
     
@@ -144,18 +144,7 @@ try{
     catch(Exception $e){
     return $e->getMessage();
         }
-} public function shtoUser()
-    {
-        try {
-            $sql = "INSERT INTO `user`(`emri`, `mbiemri`, `username`, `email`, `password`) VALUES (?,?,?,?,?)";
-            $stm = $this->dbConn->prepare($sql);
-            $stm->execute([$this->emri, $this->mbiemri, $this->username, $this->email, $this->password]);
-
-            $_SESSION['regMeSukses'] = true;
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }
+}
 
 // Inserto te dhenat tjera pas te dhenave te para 
 public function insertotherData($grupi, $semundjet,$pershkrimi){
@@ -177,7 +166,7 @@ public function insertotherData($grupi, $semundjet,$pershkrimi){
     
     public function kontrollo(){
         try {
-            $sql = 'SELECT * from Donator WHERE nrleternjoftimit = ?';
+            $sql = "SELECT * from `donator` WHERE `nrleternjoftimit` = ?";
             $stm = $this->dbcon->prepare($sql);
             $stm->execute([$this->nrleternjoftimit]);
 
@@ -190,9 +179,9 @@ public function insertotherData($grupi, $semundjet,$pershkrimi){
     public function kontrolloLlogarin()
     {
         try {
-            $sql = 'SELECT * from Donator WHERE nrleternjoftimit = ? and passwordi = ?';
+            $sql = 'SELECT * from donator WHERE nrleternjoftimit = ? and passwordi = ?';
             $stm = $this->dbcon->prepare($sql);
-            $stm->execute([$this->nrleternjoftimit, $this->password]);
+            $stm->execute([$this->nrleternjoftimit, $this->passwordi]);
 
             return $stm->fetch();
         } catch (Exception $e) {

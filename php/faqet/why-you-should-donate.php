@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Why You Should Donate</title>
     <link rel="icon" href="../img/logo.png" type="image/icon">
-    <link rel="stylesheet" href="../css/blood-donor.css">
+    <link rel="stylesheet" href="../../css/blood-donor.css">
     <script src="https://kit.fontawesome.com/7be85ed243.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-other">
-       <div class="logo"><a href="blood-donor.html"><img src="../img/logo.png" alt=""></a></div>
+       <div class="logo"><a href="index.html"><img src="../img/logo.png" alt=""></a></div>
        <ul>
         <li><a href="why-you-should-donate.html">Pse duhet të dhuroni gjak </a></li>
         <li><a href="about-us.html"> Rreth Nesh </a></li>

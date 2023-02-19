@@ -1,21 +1,23 @@
         function Valido(){
-            ////////////////////////////// FIRSTNAME DECLARATION AND REGEX
+    /////////////////////////////////////////// ID DECLARATION AND REGEX
+    var IDRegex=/^[0-9]{10,10} $/
+    var nrleternjoftimit= document.getElementById('id').value
+
+    ////////////////////////////// FIRSTNAME DECLARATION AND REGEX
     var FirstnameRegex=/^[A-Z]+[a-zA-Z]{3,15}$/
-    var Firstname= document.getElementById('name').value
+    var Firstname= document.getElementById('emri').value
     ////////////////////////////////////// USERNAME DECLARATION AND REGEX
     var LastNameRegex=/^[A-Za-z0-9]{3,20}$/
-    var lastname = document.getElementById('lname').value
+    var lastname = document.getElementById('mbiemri').value
     /////////////////////////////////////////// EMAIL DECLARATION AND REGEX
     var emailRegex= /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+){1}$/
-    var email=document.getElementById('email').value
-/////////////////////////////////////////// ID DECLARATION AND REGEX
-    var IDRegex=/^[0-9]{10,10} $/
-    var id= document.getElementById('idd').value
+    var email=document.getElementById('numri').value
+
     ///////////////////////////////////////////// PASSWORD DECLARATION AND REGEX
     var passwordRegex= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Z\d]{7}$/
-    var password =document.getElementById('password').value
+    var passwordi =document.getElementById('password').value
 
-
+                
 
     ////////////////////////////////////////////////// FIRSTNAME IF
     if(FirstnameRegex.test(Firstname)){

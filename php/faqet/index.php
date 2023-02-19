@@ -15,16 +15,8 @@ if (!isset($_SESSION)) {
     <script src="https://kit.fontawesome.com/7be85ed243.js"></script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo"><a href="blood-donor.html"><img src="../../img/logo.png" alt=""></a></div>
-        <ul class="nav-links">
-         <li><a href="why-you-should-donate.php"> Pse duhet të dhuroni gjak </a></li>
-         <li><a href="about-us.php"> Rreth nesh </a></li>
-         <li><a href="contact-us.php"> Na kontaktoni </a></li>
-         <li><a href="login.php"> <i class="fa-solid fa-user"></i> </a></li>
-        </ul>
-     </nav>
-
+    
+  <?php include '../includes/navbar.php'; ?>
 
     <main class="background-slider">
         <div class="background1 slider">

@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
     <section class="signup">
         <div class="signup-box">
             <div class="signup-box-inside">
-            <form name="SignUpForm" action='' method="POST">
+            <form id="signupform" name="SignUpForm" onsubmit="return Validimi();" action='' method="POST">
               <?php
             if (isset($_SESSION['regMeSukses'])) {
               echo '<script>alert("U regjistrua me sukses!");</script>';
@@ -70,7 +70,7 @@ if (isset($_POST['submit'])) {
                 
                 
                 
-                <input type="submit" onclick="" name="submit"class="signup-button"value="Sign Up">
+                <input type="submit" onclick="Valido()" name="submit"class="signup-button"value="Sign Up">
                 <a href="login.php">Log In.</a>
                 </form>
        
@@ -80,6 +80,7 @@ if (isset($_POST['submit'])) {
 </html>
 
 <?php
+
 unset($_SESSION['regMeSukses']);
 unset($_SESSION['nrleternjoftimitEkziston']);
 ?>

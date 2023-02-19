@@ -12,7 +12,7 @@ if (isset($_POST['login'])) {
 
 
     if ($kontrollo == true) {
-        $Modeli->setPassword($_POST['password']);
+        $Modeli->setPasswordi($_POST['passwordi']);
         $kontrolloLlogarin = $Modeli->kontrolloLlogarin();
 
         if ($kontrolloLlogarin == true) {
@@ -20,8 +20,7 @@ if (isset($_POST['login'])) {
             $_SESSION['id'] = $kontrolloLlogarin['id'];
             $_SESSION['emri'] = $kontrolloLlogarin['emri'];
             $_SESSION['mbiemri'] = $kontrolloLlogarin['mbiemri'];
-            $_SESSION['email'] = $kontrolloLlogarin['email'];
-            echo "<script>document.location='../faqet/blood-donor.php'</script>";
+            echo "<script>document.location='../faqet/index.php'</script>";
         } else {
             $_SESSION['PasswordGabim'] = true;
             echo "<script>

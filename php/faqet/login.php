@@ -33,7 +33,7 @@ if (!isset($_SESSION)) {
       }
       ?>
       <input type="text" name="nrleternjoftimit" class="field" placeholder="Your Id">
-      <input type="password" name="password" class="field" placeholder="Your Password">
+      <input type="password" name="passwordi" class="field" placeholder="Your Password">
       <div class="reg">
         <p>Don't have an account? <a href="signup.php">Sign Up</a></p>
         <input class="button" onclick="Valido();" type="submit" name="login">
