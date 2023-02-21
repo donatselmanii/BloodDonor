@@ -12,18 +12,14 @@ if (!isset($_SESSION)) {
 
 
 if (isset($_POST['shtoLajmin'])) {
-  $_SESSION['titulli'] = $_POST['lajmiName'];
-  $_SESSION['pershkrimi'] = $_POST['pershkrimi'];
-  $_SESSION['fotolajmit'] = $_FILES['lajmiPhoto'];
-  $_SESSION['contentfoto'] = $_FILES['contentPhoto'];
-  $_SESSION['content'] = $_POST['content'];
-  $_SESSION['EmriFotos'] = $_FILES['lajmiPhoto']['name'];
-  $_SESSION['kategorialajmit'] = $_POST['kategoria'];
 
-
-
-  $NewsCRUD->InsertLajmin(); 
-   
+          $NewsCRUD->setTitulli($_POST['lajmiName']);
+          $NewsCRUD->setPershkrimi($_POST['pershkrimi']);
+          $NewsCRUD->setContent($_POST['content']);
+          $_SESSION['FotoLajmit'] = $_FILES['lajmiPhoto'];
+          $NewsCRUD->InsertLajmin();
+  
+  
 }
 ?>
 <!DOCTYPE html>
@@ -33,7 +29,7 @@ if (isset($_POST['shtoLajmin'])) {
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vendosja e Produkteve | Tech Store</title>
+  <title>Vendosja e Produkteve</title>
   <link rel="shortcut icon" href="../../img/web/favicon.ico" />
   <link rel="stylesheet" href="../../css/header.css" />
   <link rel="stylesheet" href="../../css/forms.css" />
@@ -42,16 +38,15 @@ if (isset($_POST['shtoLajmin'])) {
 
 <body>
   
+  
   <div class="main-box">
     <form name="shtoLajmin" onsubmit="return validimiShtimiProduktit();" action='' method="POST"
       enctype="multipart/form-data">
       <?php
       if (isset($_SESSION['LajmiUinsertua'])) {
         echo '
-                  <script>alert("Lajmi u shtua me sukses")</script>
-            ';
-              
-              
+                  <script>alert("Lajmi u shtua me sukses");</script>
+            '; 
       }
       if (isset($_SESSION['madhesiaGabim'])) {
         echo '
@@ -101,7 +96,7 @@ if (isset($_POST['shtoLajmin'])) {
 
 </html>
 <?php
-unset($_SESSION['mesazhiMeSukses']);
+unset($_SESSION['LajmiUinsertua']);
 unset($_SESSION['madhesiaGabim']);
 unset($_SESSION['problemNeBartje']);
 unset($_SESSION['fileNukSuportohet']);

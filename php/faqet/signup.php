@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
     <section class="signup">
         <div class="signup-box">
             <div class="signup-box-inside">
-            <form id="signupform" name="SignUpForm" onsubmit="return Validimi();" action='' method="POST">
+            <form id="signupform" name="SignUpForm" onsubmit="return validimiSignUp();" action='' method="POST">
               <?php
             if (isset($_SESSION['regMeSukses'])) {
               echo '<script>alert("U regjistrua me sukses!");</script>';

@@ -19,7 +19,7 @@ if (!isset($_SESSION)) {
         <div class="login-box">
             <div class="login-box-inside">
                 <h2>Log In</h2>
-                <form name="LoginForm" onsubmit="Valido();" action='../funksione/loginUser.php' method="POST">
+                <form name="LoginForm" onsubmit="validimiLogIn();" action='../funksione/loginUser.php' method="POST">
       <?php
       if (isset($_SESSION['PasswordGabim'])) {
         echo '
@@ -36,7 +36,7 @@ if (!isset($_SESSION)) {
       <input type="password" name="passwordi" class="field" placeholder="Your Password">
       <div class="reg">
         <p>Don't have an account? <a href="signup.php">Sign Up</a></p>
-        <input class="button" onclick="Valido();" type="submit" name="login">
+        <input class="button" onclick="validimiLogIn();" type="submit" name="login">
       </div>
       
                 

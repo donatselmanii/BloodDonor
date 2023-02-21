@@ -91,20 +91,16 @@ Class NewsCRUD extends dbcon{
     
       //Metoda per regjistrimin e lajmeve ne databaze
       public function InsertLajmin(){
-        try {
-            $this->setTitulli($_SESSION['titulli']);
-            $this->setPershkrimi($_SESSION['pershkrimi']);
-            $this->setContentfoto($_SESSION['fotolajmit']);
-            $this->setContent($_SESSION['content']);
-            $this->setContentfoto($_SESSION['contentfoto']);
+        try {     
+          $this->barteFotonNeFolder();
             
-
             $sql = "INSERT INTO `lajmi`(`titulli`, `pershkrimi`,`fotolajmit`,`content`, `contentfoto`) VALUES (?,?,?,?,?)";
             $stm = $this->dbcon->prepare($sql);
             $stm->execute([$this->titulli,$this->pershkrimi,$this->fotolajmit,$this->content, $this->contentfoto]);
-
-            $_SESSION['LajmiUinsertua'] = true;
             
+            
+            
+            $_SESSION['LajmiUinsertua'] = true;
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -153,7 +149,7 @@ Class NewsCRUD extends dbcon{
             if (in_array($fileActualExt, $teLejuara)) {
                 if ($errorFoto === 0) {
                     $_SESSION['emriUnikFotos'] = uniqid('', true) . "." . $fileActualExt;
-                    $destinacioniFotos = '../../img/products/' . $_SESSION['emriUnikFotos'];
+                    $destinacioniFotos = '../../img/lajmet/' . $_SESSION['emriUnikFotos'];
                     move_uploaded_file($emeriTempIFotes, $destinacioniFotos);
 
                 } else {
@@ -162,6 +158,17 @@ Class NewsCRUD extends dbcon{
             } else {
                 $_SESSION['fileNukSuportohet'] = true;
             }
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+    public function shfaq4LajmetEFundit(){
+        try {
+            $sql = "SELECT * FROM (SELECT * FROM `lajmi` ORDER BY `lajmiID` DESC LIMIT 4) AS lajmetEFundit ORDER BY lajmetEFundit.lajmiID DESC";
+            $stm = $this->dbcon->prepare($sql);
+            $stm->execute();
+
+            return $stm->fetchAll();
         } catch (Exception $e) {
             return $e->getMessage();
         }

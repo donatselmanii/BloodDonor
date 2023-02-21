@@ -2,7 +2,11 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+require_once('../CRUD/NewsCRUD.php');
+
+$NewsCRUD = new NewsCRUD();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,30 +83,18 @@ if (!isset($_SESSION)) {
 </section>
 
 <div id="main-boxes"  class="main-boxes">
-    <div class="main-box">
-        <img src="../../img/main-box4.JPG" alt="">
-        <p class="main-box-header">Mëso</p>
-        <p>Ne ofrojmë një gamë inovative të ngjarjeve arsimore për profesionistët shëndetësorë për të mbështetur praktikën e sigurt të transfuzionit.</p>
-        <a href="#">Lexo më shumë &#10095;</a>
-    </div>
-    <div class="main-box">
-      <img src="../../img/main-box5.jpg" alt="">
-      <p class="main-box-header">Menaxhimi i Inventarit</p>
-      <p>Menaxhimi i inventarit përfshin të gjitha aktivitetet që lidhen me porositjen, ruajtjen, trajtimin dhe lëshimin e produkteve të gjakut.</p>
-    <a href="#">Mësoni rreth inventarit tonë &#10095;</a>
-    </div>
-    <div class="main-box">
-     <img src="../../img/main-box6.jpg" alt="">
-     <p class="main-box-header">A mund të dhuroj gjak?</p>
-     <p>Shihni nëse keni të drejtë të dhuroni gjak sot, ose gjeni përgjigje për pyetjet e bëra shpesh.</p>
-     <a href="#">Kontrolloni përshtatshmërinë tuaj &#10095; </a>
-    </div>
-    <div class="main-box">
-        <img src="../../img/main-box7.jpg" alt="">
-        <p class="main-box-header"></p>
-        <p>Bëhuni pjesë e programit tonë të donacioneve në grup. Bëhet fjalë për miqësinë, komunitetin dhe mirësinë.</p>
-        <a href="#">Lexo më shumë &#10095;</a>
-    </div>
+<?php
+      $lajmet = $NewsCRUD->shfaq4LajmetEFundit();
+      foreach ($lajmet as $lajmi) {
+        echo '<div class="main-box"">
+        <img src="../../img/lajmet/' . $lajmi['fotolajmit'] . '" alt="" />' .
+          '<p>' . $lajmi['titulli'] . '</p>' .
+          '<p>' . $lajmi['content'] . ' </p>
+          <a href="./order.php?lajmiID=' . $lajmi['lajmiID'] . '"><button class="button">Lexo më shumë </button></a>
+        </div>';
+      }
+
+      ?>
 </div>
 <div class="svg2"></div>
 <h1 class="wwd">Cfarë bëjmë ne</h1>
@@ -141,28 +133,11 @@ if (!isset($_SESSION)) {
     <a href="#">Unë kam një tatuazh. A mund të dhuroj gjak? &#10095;</a>
     <a href="#">Kam hekur pak. A mund të dhuroj gjak? &#10095;</a>
 </div>
-<div class="svg3"></div>
-<footer class="footer">
-    <div class="first">
-    <h1>Rrjetet Sociale</h1>
-   <div class="social-media">
-    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-   </div>
-   </div>
 
-   <div class="second">
-    <h1>Na gjeni këtu</h1>
-    <p>Rruga Shkupi, Nr.25, Prishtinë 10000</p>
-       
-   </div>
-</footer>
-<div class="copyright">
-    <p>© 2023 All Rights Reserved.</p>
-</div>
-<!--JS-->
-<script src="../../js/blood-donor.js"></script>
+<?php include("../includes/footer.php"); ?>
+
+
+<?php include("../funksione/skriptat.php"); ?>
 
 </body>
 </html>

@@ -2,6 +2,19 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
+require_once('../CRUD/contactFormCRUD.php');
+
+if (isset($_POST['dergoMSG'])) {
+  $cfCRUD = new contactFormCRUD();
+
+  $cfCRUD->setEmri($_POST['name']);
+  $cfCRUD->setEmail($_POST['email']);
+  $cfCRUD->setPhone($_POST['phone']);
+  $cfCRUD->setMsg($_POST['msgField']);
+
+  $cfCRUD->insertoMesazhin();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,57 +28,43 @@ if (!isset($_SESSION)) {
     <script src="https://kit.fontawesome.com/7be85ed243.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-other">
-       <div class="logo"><a href="index.php"><img src="../../img/logo.png" alt=""></a></div>
-       <ul>
-        <li><a href="why-you-should-donate.php"> Pse duhet të dhuroni gjak </a></li>
-        <li><a href="about-us.php">Rreth nesh </a></li>
-        <li><a href="contact-us.php"> Na kontaktoni </a></li>
-        <li><a href="login.php"> <i class="fa-solid fa-user"></i> </a></li>
-       </ul>
-    </nav>
-
+    <?php
+    include("../includes/navbar.php");
+    ?>
+    <form name="ContactForm" onsubmit="return validimiContactForm()" action="" method="POST">
+    <?php
+      if (isset($_SESSION['mesazhiMeSukses'])) {
+        echo '
+                <script>alert("Mesazhi u dergua me sukses!");</script>
+          ';
+      }
+      ?>
     <section id="contact" class="contact">
         <div class="contact-box">
             <div class="foto"></div>
             <div class="box">
                 <h2>Na kontaktoni këtu</h2>
-                <input type="text" class="contact-field" placeholder="Your Name">
-                <input type="text" class="contact-field" placeholder="Your Email">
-                <input type="text" class="contact-field" placeholder="Phone">
-                <textarea placeholder="Message" class="contact-field"></textarea>
-                <button class="btn">Dërgo</button>
+                <input type="text" class="contact-field" name="name" placeholder="Emri">
+                <input type="text" class="contact-field" name="email" placeholder="Email">
+                <input type="text" class="contact-field" name="phone" placeholder="Telefoni">
+                <textarea placeholder="Mesazh" name="msgField" class="contact-field"></textarea>
+                <input class="btn" type="submit" value="Dergo" name="dergoMSG" />
             </div>
         </div>
     </section>
+    </form>
     <div class="map">
     <h1>Na gjeni këtu</h1>
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2327.238844522272!2d21.15822257506029!3d42.64348661715003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xdd725b95c5b659fb!2sSpitali%20Amerikan!5e1!3m2!1sen!2s!4v1671982024633!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
     
-<div class="svg4"></div>
-<footer class="footer">
-    <div class="first">
-    <h1>Rrjetet Sociale</h1>
-   <div class="social-media">
-    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-   </div>
-   </div>
-
-   <div class="second">
-    <h1>Na gjeni këtu</h1>
-    <p>Rruga Shkupi, Nr.25, Prishtinë,<br> 10000</p>
-   </div>
-</footer>
-<div class="copyright">
-    <p>© 2022 All Rights Reserved.</p>
-</div>
-<!--JS-->
-<script src="blood-donor.js"></script>
+<?php include("../includes/footer.php"); ?>
 
 
+<?php include("../funksione/skriptat.php"); ?>
 </body>
 </html>
+<?php
+unset($_SESSION['mesazhiMeSukses']);
+?>
