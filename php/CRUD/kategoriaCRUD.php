@@ -18,7 +18,7 @@ class kategoriaCRUD extends dbcon
         $this->emriKategoris = $emriKategoris;
         $this->pershkrimiKategoris = $pershkrimiKategoris;
 
-        $this->dbConn = $this->connDB();
+        $this->dbcon = $this->connDB();
     }
 
     public function getKategoriaID()
@@ -54,11 +54,11 @@ class kategoriaCRUD extends dbcon
     public function insertoKategorinLajmit()
     {
         try {
-            $this->setEmriKategoris($_SESSION['emriKat']);
-            $this->setPershkrimiKategoris($_SESSION['pershkrimiKat']);
+            $this->setEmriKategoris($_SESSION['emriKategorise']);
+            $this->setPershkrimiKategoris($_SESSION['pershkrimiKategorise']);
 
             $sql = "INSERT INTO `kategorialajmit`(`emriKategoris`, `pershkrimiKategoris`) VALUES (?,?)";
-            $stm = $this->dbConn->prepare($sql);
+            $stm = $this->dbcon->prepare($sql);
             $stm->execute([$this->emriKategoris, $this->pershkrimiKategoris]);
 
             echo '<script>document.location="../admin/shtoKategorin.php"</script>';
@@ -96,7 +96,7 @@ class kategoriaCRUD extends dbcon
     {
         try {
             $sql = "SELECT * FROM kategorialajmit";
-            $stm = $this->dbConn->prepare($sql);
+            $stm = $this->dbcon->prepare($sql);
             $stm->execute();
 
             return $stm->fetchAll();
@@ -112,7 +112,7 @@ class kategoriaCRUD extends dbcon
 
 
             echo '<select class="dropdown1" name="kategoria">
-                <option value="te tjera">Zgjedhni Kategorin</option>
+                <option value="lajme">Zgjedhni Kategorin</option>
             ';
             foreach ($kategorit as $kategoria) {
                 echo '<option value="' . $kategoria['emriKategoris'] . '">' . $kategoria['emriKategoris'] . '</option>';

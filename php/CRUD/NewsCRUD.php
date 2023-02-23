@@ -6,7 +6,7 @@ if (!isset($_SESSION)) {
 }
 Class NewsCRUD extends dbcon{
     private $lajmiID;
-    private $tituli;
+    private $titulli;
     private $pershkrimi;
     private $fotolajmit;
     private $contentfoto;
@@ -87,29 +87,32 @@ Class NewsCRUD extends dbcon{
       public function setDatainsertimit($datainsertimit) {
         $this->datainsertimit = $datainsertimit;
       }
-      
-    
+
+
       //Metoda per regjistrimin e lajmeve ne databaze
-      public function InsertLajmin(){
-        try {     
-          $this->barteFotonNeFolder();
-            
-            $sql = "INSERT INTO `lajmi`(`titulli`, `pershkrimi`,`fotolajmit`,`content`, `contentfoto`) VALUES (?,?,?,?,?)";
+      public function InsertLajmin()
+    {
+        try {
+            $this->barteFotonNeFolder();
+            $this->barteFotonNeFolderContent();
+
+            $sql = "INSERT INTO `lajmi`(`titulli`, `pershkrimi`, `fotolajmit`, `contentfoto`, `content`,`kategorialajmit`) VALUES (?,?,?,?,?,?)";
             $stm = $this->dbcon->prepare($sql);
-            $stm->execute([$this->titulli,$this->pershkrimi,$this->fotolajmit,$this->content, $this->contentfoto]);
-            
-            
-            
+            $stm->execute([$this->titulli, $this->pershkrimi, $this->fotolajmit, $this->contentfoto, $this->content, $this->kategorialajmit]);
+
             $_SESSION['LajmiUinsertua'] = true;
         } catch (Exception $e) {
             return $e->getMessage();
         }
     }
+    
+      
+      
      //Metoda e cila i shfaq te gjitha lajmet e regjistruara ne databaze
     public function shfaqiLajmet(){
       try {
           $sql = "SELECT * FROM `lajmi`";
-          $stm = $this->dbConn->prepare($sql);
+          $stm = $this->dbcon->prepare($sql);
           $stm->execute();
 
           return $stm->fetchAll();
@@ -124,8 +127,8 @@ Class NewsCRUD extends dbcon{
     {
         try {
             $sql = "SELECT * FROM lajmi WHERE lajmiID = ?";
-            $stm = $this->dbConn->prepare($sql);
-            $stm->execute([$this->produktiID]);
+            $stm = $this->dbcon->prepare($sql);
+            $stm->execute([$this->lajmiID]);
 
             return $stm->fetch();
         } catch (Exception $e) {
@@ -136,7 +139,7 @@ Class NewsCRUD extends dbcon{
     public function barteFotonNeFolder()
     {
         try {
-            $foto = $_SESSION['FotoLajmit'];
+            $foto = $_SESSION['fotolajmit'];
             $emriFotos = $foto['name'];
             $emeriTempIFotes = $foto['tmp_name'];
             $errorFoto = $foto['error'];
@@ -144,14 +147,15 @@ Class NewsCRUD extends dbcon{
             $fileExt = explode('.', $emriFotos);
             $fileActualExt = strtolower(end($fileExt));
 
-            $teLejuara = array('jpg', 'jpeg', 'png');
+            $teLejuara = array('jpg', 'jpeg', 'png', 'svg');
 
             if (in_array($fileActualExt, $teLejuara)) {
                 if ($errorFoto === 0) {
-                    $_SESSION['emriUnikFotos'] = uniqid('', true) . "." . $fileActualExt;
-                    $destinacioniFotos = '../../img/lajmet/' . $_SESSION['emriUnikFotos'];
+                    $emriUnikFotos = uniqid('', true) . "." . $fileActualExt;
+                    $destinacioniFotos = '../../img/lajmet/index/' . $emriUnikFotos;
                     move_uploaded_file($emeriTempIFotes, $destinacioniFotos);
 
+                    $this->setFotolajmit($emriUnikFotos);
                 } else {
                     $_SESSION['problemNeBartje'] = true;
                 }
@@ -162,9 +166,39 @@ Class NewsCRUD extends dbcon{
             return $e->getMessage();
         }
     }
-    public function shfaq4LajmetEFundit(){
+    public function barteFotonNeFolderContent()
+    {
         try {
-            $sql = "SELECT * FROM (SELECT * FROM `lajmi` ORDER BY `lajmiID` DESC LIMIT 4) AS lajmetEFundit ORDER BY lajmetEFundit.lajmiID DESC";
+            $foto = $_SESSION['contentfoto'];
+            $emriFotos = $foto['name'];
+            $emeriTempIFotes = $foto['tmp_name'];
+            $errorFoto = $foto['error'];
+
+            $fileExt = explode('.', $emriFotos);
+            $fileActualExt = strtolower(end($fileExt));
+
+            $teLejuara = array('jpg', 'jpeg', 'png', 'svg');
+
+            if (in_array($fileActualExt, $teLejuara)) {
+                if ($errorFoto === 0) {
+                    $emriUnikFotosContent = uniqid('', true) . "." . $fileActualExt;
+                    $destinacioniFotos = '../../img/lajmet/content/' . $emriUnikFotosContent;
+                    move_uploaded_file($emeriTempIFotes, $destinacioniFotos);
+
+                    $this->setContentfoto($emriUnikFotosContent);
+                } else {
+                    $_SESSION['problemNeBartje'] = true;
+                }
+            } else {
+                $_SESSION['fileNukSuportohet'] = true;
+            }
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+    public function shfaq4LajmetEFunditLAJME(){
+        try {
+            $sql = "SELECT * FROM (SELECT * FROM `lajmi` where kategorialajmit='lajme' ORDER BY `lajmiID` DESC LIMIT 4 ) AS lajmetEFundit ORDER BY lajmetEFundit.lajmiID DESC";
             $stm = $this->dbcon->prepare($sql);
             $stm->execute();
 
@@ -174,7 +208,65 @@ Class NewsCRUD extends dbcon{
         }
     }
     
+    
+    public function shfaq3LajmetEFunditCFAREBEJMNE(){
+      try {
+          $sql = "SELECT * FROM (SELECT * FROM `lajmi` where kategorialajmit='Cfarebejmne' ORDER BY `lajmiID` DESC LIMIT 3 ) AS lajmetEFundit ORDER BY lajmetEFundit.lajmiID DESC";
+          $stm = $this->dbcon->prepare($sql);
+          $stm->execute();
+
+          return $stm->fetchAll();
+      } catch (Exception $e) {
+          return $e->getMessage();
+      }
+  }
+  
+
+public function fshijLajminSipasID(){
+        try {
+            $lajmi = $this->shfaqLajminSipasID();
+            unlink('../../img/lajmet/index/' . $lajmi['fotolajmit']);
+            unlink('../../img/lajmet/content/' . $lajmi['contentfoto']);
+
+            $sql = "DELETE FROM lajmi WHERE lajmiID = ?";
+            $stm = $this->dbcon->prepare($sql);
+            $stm->execute([$this->lajmiID]);
+
+            $_SESSION['mesazhiFshirjesMeSukses'] = true;
+            echo '<script>document.location="../admin/lajmet.php"</script>';
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
+
+    
+    public function editoLajmin($kaFoto)
+    {
+        try {
+            if ($kaFoto == false) {
+                $sql = "UPDATE `lajmi` SET `titulli`=?,`pershkrimi`=?,`kategorialajmit`=?,`content`=?,`dataModifikimit`=current_timestamp() WHERE lajmiID = ?";
+                $stm = $this->dbcon->prepare($sql);
+                $stm->execute([$this->titulli, $this->pershkrimi, $this->kategorialajmit, $this->content, $this->lajmiID]);
+            } else {
+                $lajmi = $this->shfaqLajminSipasID();
+                unlink('../../img/lajmet/index/'. $lajmi['fotolajmit']);
+                unlink('../../img/lajmet/content/' . $lajmi['contentfoto']);
+                $this->barteFotonNeFolder();
+                $this->barteFotonNeFolderContent();
+
+                $sql = "UPDATE `lajmi` SET `titulli`=?,`pershkrimi`=?,`kategorialajmit`=?,`fotolajmit`=?,`contentfoto`=?,`dataModifikimit`=current_timestamp(),`content`=? WHERE lajmiID = ?";
+                $stm = $this->dbcon->prepare($sql);
+                $stm->execute([$this->titulli, $this->pershkrimi, $this->kategorialajmit, $this->fotolajmit, $this->contentfoto, $this->content, $this->lajmiID]);
+            }
+
+            $_SESSION['mesazhiMeSukses'] = true;
+            echo '<script>document.location="../admin/lajmet.php"</script>';
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+  }
 
 
 ?>

@@ -233,18 +233,28 @@ return $e->getMessage();
 }
 //Metoda per fshirjen e te dhenave (DELETE)
 public function delete(){
-try{
-$sql = "DELETE FROM Studenti where id=?";
-$stm = $this->dbConn->prepare($sql);
-$stm->execute([$this->id]);
-$dhenat = $stm->fetchAll();
-return $dhenat;
+    try{
+        $sql = "DELETE FROM Studenti where id=?";
+        $stm = $this->dbConn->prepare($sql);
+        $stm->execute([$this->id]);
+        $dhenat = $stm->fetchAll();
+        return $dhenat;
+    }
+    catch(Exception $e){
+        return $e->getMessage();
 }
-catch(Exception $e){
-return $e->getMessage();
 }
-}
+public function shfaqTeGjithePerdoruesit(){
+        try {
+            $sql = 'SELECT * from donator';
+            $stm = $this->dbcon->prepare($sql);
+            $stm->execute();
 
+            return $stm->fetchAll();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
 
 
 }

@@ -27,7 +27,7 @@ if (!isset($_SESSION['aksesi'])) {
                 if ($_SESSION['aksesi'] != 0) {
                     echo '
 
-                    <li><a href="../admin/shtoLajmin.php"> admin </a></li>
+                    <li><a href="../admin/dashboard.php"> admin </a></li>
 
                     ';
                     

@@ -12,13 +12,30 @@ if (!isset($_SESSION)) {
 
 
 if (isset($_POST['shtoLajmin'])) {
-
+/*
+          $_SESSION['titulli'] = $_POST['lajmiName'];
+          $_SESSION['pershkrimi'] = $_POST['pershkrimi'];
+          $_SESSION['fotolajmit'] = $_FILES['lajmiPhoto'];
+          $_SESSION['contentfoto'] =$_FILES['contentPhoto'];
+          $_SESSION['content'] = $_POST['content'];
+          $_SESSION['kategorialajmit'] = $_POST['kategoria'];
+          $_SESSION['emriFotosLajmit'] = $_FILES['lajmiPhoto']['name'];
+          $_SESSION['emriFotosLajmitContent'] = $_FILES['contentPhoto']['name'];
+          */
           $NewsCRUD->setTitulli($_POST['lajmiName']);
           $NewsCRUD->setPershkrimi($_POST['pershkrimi']);
           $NewsCRUD->setContent($_POST['content']);
-          $_SESSION['FotoLajmit'] = $_FILES['lajmiPhoto'];
+          $NewsCRUD->setKategorialajmit($_POST['kategoria']);
+          $_SESSION['fotolajmit'] = $_FILES['lajmiPhoto'];
+          $_SESSION['contentfoto'] = $_FILES['contentPhoto'];
+
           $NewsCRUD->InsertLajmin();
-  
+          echo $NewsCRUD->getTitulli();
+          echo $NewsCRUD->getPershkrimi();
+          echo $NewsCRUD->getContent();
+          echo $NewsCRUD->getFotolajmit();
+          echo $NewsCRUD->getContentfoto();
+          
   
 }
 ?>

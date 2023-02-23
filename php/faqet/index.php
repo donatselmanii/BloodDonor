@@ -84,39 +84,33 @@ $NewsCRUD = new NewsCRUD();
 
 <div id="main-boxes"  class="main-boxes">
 <?php
-      $lajmet = $NewsCRUD->shfaq4LajmetEFundit();
+      $lajmet = $NewsCRUD->shfaq4LajmetEFunditLAJME();
       foreach ($lajmet as $lajmi) {
         echo '<div class="main-box"">
-        <img src="../../img/lajmet/' . $lajmi['fotolajmit'] . '" alt="" />' .
+        <img src="../../img/lajmet/index/' . $lajmi['fotolajmit'] . '" alt="" />' .
           '<p>' . $lajmi['titulli'] . '</p>' .
-          '<p>' . $lajmi['content'] . ' </p>
-          <a href="./order.php?lajmiID=' . $lajmi['lajmiID'] . '"><button class="button">Lexo më shumë </button></a>
+          '<p>' . $lajmi['pershkrimi'] . ' </p>
+          <a href="./lajmi.php?lajmiID=' . $lajmi['lajmiID'] . '"><button class="button">Lexo më shumë </button></a>
         </div>';
       }
 
       ?>
 </div>
+
 <div class="svg2"></div>
 <h1 class="wwd">Cfarë bëjmë ne</h1>
 <div class="main-boxes wwd-boxes">
-    <div class="main-box">
-        <img src="../../img/main-box8.JPG" alt="">
-        <p class="main-box-header">Programi</p>
-        <p>Nga përpjekja për të hequr dhimbjen nga dhurimi i gjakut deri te zbulimi i një grupi krejt të ri gjaku, programi ynë i kërkimit është mahnitës.</p>
-        <a href="#">Programi I Kërkimit  &#10095;</a>
-    </div>
-    <div class="main-box">
-      <img src="../../img/main-box9.JPG" alt="">
-      <p class="main-box-header">Strategjia</p>
-      <p>Sprovat, studimet dhe idetë kërkojnë një planifikim të kujdesshëm për t'i sjellë në jetë. Strategjia jonë e kërkimit na ndihmon me çdo zbulim.</p>
-    <a href="#">Strategjia E Kërkimit &#10095;</a>
-    </div>
-    <div class="main-box">
-     <img src="../../img/main-box10.JPG" alt="">
-     <p class="main-box-header">Trajnimet</p>
-     <p>Ne nuk mund ta bëjmë atë vetëm, ose përgjithmonë. Ne bashkëpunojmë me organizata të tjera dhe trajnojmë studiues të ardhshëm të gjakut.</p>
-     <a href="#">Trajnimet E Kërkimit </a>
-    </div>
+    <?php
+$lajmet = $NewsCRUD->shfaq3LajmetEFunditCFAREBEJMNE();
+      foreach ($lajmet as $lajmi) {
+        echo '<div class="main-box"">
+        <img src="../../img/lajmet/index/' . $lajmi['fotolajmit'] . '" alt="" />' .
+          '<p>' . $lajmi['titulli'] . '</p>' .
+          '<p>' . $lajmi['pershkrimi'] . ' </p>
+          <a href="./lajmi.php?lajmiID=' . $lajmi['lajmiID'] . '"><button class="button">Lexo më shumë </button></a>
+        </div>';
+      }
+      ?>
 </div>
 <div class="research">
     <img src="../../img/research.jpg" alt="">
