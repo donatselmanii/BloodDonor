@@ -28,7 +28,7 @@ $NewsCRUD = new NewsCRUD();
                 <h1>Bëhu donator.</h1>
                 <p>Kur dhuroni gjak, ju jeni më shumë se thjesht një Dhurues, ju jeni një HERO!</p>
                 <h2>Bëj gjënë e duhur.</h2>
-                <button>Dhuro gjak tani!</button>
+                <button><a href="Donate.php">Dhuro gjak tani!</a></button>
             </div>
         </div>
         <div class="background2 slider">
@@ -36,7 +36,7 @@ $NewsCRUD = new NewsCRUD();
                 <h1>Shpëto një jetë.</h1>
                 <p>Dhuroni gjak ose plazmën për të bërë një ndryshim në këtë botë</p>
                 <h2>Edhe ti mund ta bësh këtë.</h2>
-                <button>Dhuro gjak tani!</button>
+                <button><a href="Donate.php">Dhuro gjak tani!</a></button>
             </div>
         </div>
     </main>

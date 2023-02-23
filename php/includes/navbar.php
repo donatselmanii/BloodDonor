@@ -21,7 +21,7 @@ if (!isset($_SESSION['aksesi'])) {
 <body>
     
             <nav class="navbar">
-            <div class="logo"><a href="blood-donor.html"><img src="../../img/logo.png" alt=""></a></div>
+            <div class="logo"><a href="../faqet/index.php"><img src="../../img/logo.png" alt=""></a></div>
             <ul class="nav-links">
                 <?php
                 if ($_SESSION['aksesi'] != 0) {

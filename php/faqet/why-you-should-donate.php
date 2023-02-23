@@ -11,17 +11,17 @@
 </head>
 <body>
     <nav class="navbar navbar-other">
-       <div class="logo"><a href="index.html"><img src="../img/logo.png" alt=""></a></div>
+       <div class="logo"><a href="index.html"><img src="../../img/logo.png" alt=""></a></div>
        <ul>
-        <li><a href="why-you-should-donate.html">Pse duhet të dhuroni gjak </a></li>
-        <li><a href="about-us.html"> Rreth Nesh </a></li>
-        <li><a href="contact-us.html"> Na kontaktoni </a></li>
-        <li><a href="login.html"> <i class="fa-solid fa-user"></i> </a></li>
+        <li><a href="../faqet/why-you-should-donate.php">Pse duhet të dhuroni gjak </a></li>
+        <li><a href="../faqet/about-us.php"> Rreth Nesh </a></li>
+        <li><a href="../faqet/contact-us.php"> Na kontaktoni </a></li>
+        <li><a href="../faqet/login.php"> <i class="fa-solid fa-user"></i> </a></li>
        </ul>
     </nav>
 <div class="wysd-header">
     <h1 class="wysd">Pse<br>  Duhet <br> Të Dhuroni<br> Gjak?!</h1>
-    <img src="../img/wysd1.jpg" alt="">
+    <img src="../../img/wysd1.jpg" alt="">
     </div>
 
     <section class="content-wysd">
@@ -31,7 +31,7 @@
            <li>Ndërsa i gjithë procesi i dhurimit të gjakut mund të zgjasë rreth një orë, procesi aktual i dhurimit të gjakut zgjat vetëm rreth 10-15 minuta. </li>
            <li>Shumica e të rriturve të shëndetshëm mund të dhurojnë rreth gjysmë litri. Brenda pak ditësh nga dhurimi i gjakut, trupi juaj zëvendëson lëngjet e humbura dhe qelizat e kuqe të humbura të gjakut.</li>
           </ul>
-        <img src="../img/wysd.JPG" alt="">
+        <img src="../../img/wysd.JPG" alt="">
     </section>
 
 
@@ -55,8 +55,9 @@
     <div class="copyright">
         <p>© 2022 All Rights Reserved.</p>
     </div>
-    <!--JS-->
-    <script src="blood-donor.js"></script>
+    <?php
+    include('../funksione/skriptat.php');
+    ?>
     
     
     </body>

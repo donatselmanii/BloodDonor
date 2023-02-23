@@ -244,7 +244,7 @@ public function fshijLajminSipasID(){
     {
         try {
             if ($kaFoto == false) {
-                $sql = "UPDATE `lajmi` SET `titulli`=?,`pershkrimi`=?,`kategorialajmit`=?,`content`=?,`dataModifikimit`=current_timestamp() WHERE lajmiID = ?";
+                $sql = "UPDATE `lajmi` SET `titulli`=?,`pershkrimi`=?,`kategorialajmit`=?,`content`=?,`datainsertimit`=current_timestamp() WHERE lajmiID = ?";
                 $stm = $this->dbcon->prepare($sql);
                 $stm->execute([$this->titulli, $this->pershkrimi, $this->kategorialajmit, $this->content, $this->lajmiID]);
             } else {
@@ -254,7 +254,7 @@ public function fshijLajminSipasID(){
                 $this->barteFotonNeFolder();
                 $this->barteFotonNeFolderContent();
 
-                $sql = "UPDATE `lajmi` SET `titulli`=?,`pershkrimi`=?,`kategorialajmit`=?,`fotolajmit`=?,`contentfoto`=?,`dataModifikimit`=current_timestamp(),`content`=? WHERE lajmiID = ?";
+                $sql = "UPDATE `lajmi` SET `titulli`=?,`pershkrimi`=?,`kategorialajmit`=?,`fotolajmit`=?,`contentfoto`=?,`datainsertimit`=current_timestamp(),`content`=? WHERE lajmiID = ?";
                 $stm = $this->dbcon->prepare($sql);
                 $stm->execute([$this->titulli, $this->pershkrimi, $this->kategorialajmit, $this->fotolajmit, $this->contentfoto, $this->content, $this->lajmiID]);
             }

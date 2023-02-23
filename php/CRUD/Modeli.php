@@ -176,8 +176,7 @@ public function insertotherData($grupi, $semundjet,$pershkrimi){
         }
     }
     
-    public function kontrolloLlogarin()
-    {
+    public function kontrolloLlogarin(){
         try {
             $sql = 'SELECT * from donator WHERE nrleternjoftimit = ? and passwordi = ?';
             $stm = $this->dbcon->prepare($sql);
@@ -188,61 +187,44 @@ public function insertotherData($grupi, $semundjet,$pershkrimi){
             return $e->getMessage();
         }
     }
+    public function kontrolloDonator(){
+        try{
+            $sql='SELECT grupi, semundjet, pershkrimi, email from donator where id=? and `grupi` is null and `semundjet` is null and `pershkrimi` is null and `email` is null ';
+            $stm = $this->dbcon->prepare($sql);
+            $stm->execute([$this->id]);
+            return $stm->fetch();
+        }
+         catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
 
 //Metoda per shfaqjen e te gjithe te dhenave te studentit
-public function shfaqDhenat(){
-try{
-//$sql = "SELECT * FROM Studenti";
-$sql = "CALL GetAllStudnetet()";
-$stm = $this->dbConn->prepare($sql);
-$stm->execute();
-$dhenat = $stm->fetchAll();
-return $dhenat;
-}
-catch(Exception $e){
-return $e->getMessage();
-}
-}
-//Metoda per shfaqjen e te gjithe te dhenave te studentit
-public function shfaqSipasIDs(){
-try{
-$sql = "SELECT * FROM Donator where id=?";
-$stm = $this->dbcon->prepare($sql);
-$stm->execute([$this->id]);
-$dhenat = $stm->fetchAll();
-return $dhenat;
-}
-catch(Exception $e){
-return $e->getMessage();
-}
-}
-//Metoda per Perditsim ose Editim (UPDATE)
-public function edito(){
-try{
-$sqlStm = "UPDATE Donator SET grupi=?, semundjet=?,
-pershkrimi=?where id=?";
-$stm = $this->dbcon->prepare($sqlStm);
-$stm->execute([$this->grupi, $this->semundjet,$this->pershkrimi, $this->id]);
-echo "<script>
-alert('dhenat jane Perditsuar me sukses');
-document.location='displayDhenat.php';</script>";
-}
-catch(Exception $e){
-return $e->getMessage();
-}
-}
-//Metoda per fshirjen e te dhenave (DELETE)
-public function delete(){
-    try{
-        $sql = "DELETE FROM Studenti where id=?";
-        $stm = $this->dbConn->prepare($sql);
-        $stm->execute([$this->id]);
-        $dhenat = $stm->fetchAll();
-        return $dhenat;
-    }
+    public function shfaqDhenat(){
+        try{
+            //$sql = "SELECT * FROM Studenti";
+            $sql = "CALL GetAllStudnetet()";
+            $stm = $this->dbConn->prepare($sql);
+            $stm->execute();
+            $dhenat = $stm->fetchAll();
+            return $dhenat;
+        }
     catch(Exception $e){
         return $e->getMessage();
+    }
 }
+//Metoda per shfaqjen e te gjithe te dhenave te studentit
+    public function shfaqSipasIDs(){
+        try{
+            $sql = "SELECT * FROM Donator where id=?";
+            $stm = $this->dbcon->prepare($sql);
+            $stm->execute([$this->id]);
+            $dhenat = $stm->fetchAll();
+            return $dhenat;
+        }
+    catch(Exception $e){
+        return $e->getMessage();
+    }
 }
 public function shfaqTeGjithePerdoruesit(){
         try {
