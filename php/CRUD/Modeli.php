@@ -10,7 +10,7 @@ private $nrleternjoftimit;
 private $emri;
 private $mbiemri;
 private $datelindja;
-private $grupi;
+private $kategoriagrupit;
 private $adresa;
 private $semundjet;
 private $pershkrimi;
@@ -19,13 +19,13 @@ private $email;
 private $passwordi;
 private $numri;
 private $dbConn;
-public function __construct($id='', $nrleternjoftimit='', $emri='', $mbiemri='', $datelindja='', $grupi='', $adresa='', $semundjet='',$pershkrimi='',$aksesi='',$email='',$passwordi='',$numri='', $dbConn='') {
+public function __construct($id='', $nrleternjoftimit='', $emri='', $mbiemri='', $datelindja='', $kategoriagrupit='', $adresa='', $semundjet='',$pershkrimi='',$aksesi='',$email='',$passwordi='',$numri='', $dbConn='') {
     $this->id = $id;
     $this->nrleternjoftimit = $nrleternjoftimit;
     $this->emri = $emri;
     $this->mbiemri = $mbiemri;
     $this->datelindja = $datelindja;
-    $this->grupi = $grupi;
+    $this->kategoriagrupit = $kategoriagrupit;
     $this->adresa = $adresa;
     $this->semundjet = $semundjet;
     $this->pershkrimi=$pershkrimi;
@@ -76,12 +76,12 @@ public function setDatelindja($datelindja) {
     $this->datelindja = $datelindja;
 }
 
-public function getGrupi() {
-    return $this->grupi;
+public function getKategoriagrupit() {
+    return $this->kategoriagrupit;
 }
 
-public function setGrupi($grupi) {
-    $this->grupi = $grupi;
+public function setKategoriagrupit($kategoriagrupit) {
+    $this->kategoriagrupit = $kategoriagrupit;
 }
 
 public function getAdresa() {
@@ -147,14 +147,11 @@ try{
 }
 
 // Inserto te dhenat tjera pas te dhenave te para 
-public function insertotherData($grupi, $semundjet,$pershkrimi){
+public function insertotherData($email,$kategoriagrupit, $semundjet,$pershkrimi){
     try{
-    $sql = "UPDATE donator SET grupi = ?, semundjet = ?, pershkrimi = ? WHERE nrleternjoftimit = ?";
+    $sql = "UPDATE donator SET `email` = ?, `kategoriagrupit` = ?, `semundjet` = ?, `pershkrimi` = ? WHERE id = ?";
     $stm = $this->dbcon->prepare($sql);
-    $stm->execute([$grupi, $semundjet, $pershkrimi, $this->nrleternjoftimit]);
-    echo "<script>
-    alert('te dhenat jane perditesuar me sukses');
-    document.location='displayDhenat.php';</script>";
+    $stm->execute([$this->$kategoriagrupit, $this->email, $this->$semundjet, $this->$pershkrimi, $this->nrleternjoftimit]);
     }
     catch(Exception $e){
     return $e->getMessage();

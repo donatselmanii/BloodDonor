@@ -5,7 +5,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-class kategoriaCRUD extends dbcon
+class kategoriaCRUDQyteti extends dbcon
 {
     private $kategoriaID;
     private $emriKategoris;
@@ -54,10 +54,10 @@ class kategoriaCRUD extends dbcon
     public function insertoKategorinLajmit()
     {
         try {
-            $this->setEmriKategoris($_SESSION['emriKategorise']);
-            $this->setPershkrimiKategoris($_SESSION['pershkrimiKategorise']);
+        $this->setEmriKategoris($_SESSION['emriKategoriseQyteti']);
+            $this->setPershkrimiKategoris($_SESSION['pershkrimiKategoriseQyteti']);
 
-            $sql = "INSERT INTO `kategorialajmit`(`emriKategoris`, `pershkrimiKategoris`) VALUES (?,?)";
+            $sql = "INSERT INTO `kategoriaqytetit`(`emriKategoris`, `pershkrimiKategoris`) VALUES (?,?)";
             $stm = $this->dbcon->prepare($sql);
             $stm->execute([$this->emriKategoris, $this->pershkrimiKategoris]);
 
@@ -71,7 +71,7 @@ class kategoriaCRUD extends dbcon
     public function perditesoKategorin()
     {
         try {
-            $sql = "UPDATE `kategorialajmit` set `emriKategoris` = ?, `pershkrimiKategoris` = ? WHERE kategoriaID = ?";
+            $sql = "UPDATE `kategoriaqytetit` set `emriKategoris` = ?, `pershkrimiKategoris` = ? WHERE kategoriaID = ?";
             $stm = $this->dbcon->prepare($sql);
             $stm->execute([$this->emriKategoris, $this->pershkrimiKategoris, $this->kategoriaID]);
 
@@ -82,7 +82,7 @@ class kategoriaCRUD extends dbcon
     public function shfaqKategorinSipasID()
     {
         try {
-            $sql = "SELECT * FROM kategorialajmit where kategoriaID = ?";
+            $sql = "SELECT * FROM kategoriaqytetit where kategoriaID = ?";
             $stm = $this->dbcon->prepare($sql);
             $stm->execute([$this->kategoriaID]);
 
@@ -95,7 +95,7 @@ class kategoriaCRUD extends dbcon
     public function shfaqKategorin()
     {
         try {
-            $sql = "SELECT * FROM kategorialajmit";
+            $sql = "SELECT * FROM kategoriaqytetit";
             $stm = $this->dbcon->prepare($sql);
             $stm->execute();
 
@@ -111,8 +111,8 @@ class kategoriaCRUD extends dbcon
             $kategorit = $this->shfaqKategorin();
 
 
-            echo '<select class="dropdown1" name="kategoria">
-                <option value="lajme">Zgjedhni Kategorin</option>
+            echo '<select class="dropdown1" name="kategoriaQyteti">
+                <option value="Prishtine">Zgjedhni Kategorin</option>
             ';
             foreach ($kategorit as $kategoria) {
                 echo '<option value="' . $kategoria['emriKategoris'] . '">' . $kategoria['emriKategoris'] . '</option>';
@@ -129,7 +129,7 @@ class kategoriaCRUD extends dbcon
     public function fshijKategorinSipasID()
     {
         try {
-            $sql = "DELETE FROM kategorialajmit WHERE kategoriaID = ?";
+            $sql = "DELETE FROM kategoriaqytetit WHERE kategoriaID = ?";
             $stm = $this->dbcon->prepare($sql);
             $stm->execute([$this->kategoriaID]);
 

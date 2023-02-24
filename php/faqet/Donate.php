@@ -2,7 +2,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-if (!isset($_SESSION['userID'])) {
+if (!isset($_SESSION['id'])) {
     echo '<script>document.location="../faqet/login.php"</script>';
     $_SESSION['nukJeLogin'] = true;
 }?>
@@ -24,11 +24,11 @@ $Modeli = new Modeli();
 $Modeli->setId($_SESSION['id']);
 $kontrollotedhenatDonator= $Modeli->kontrolloDonator();
 $teDhenatKlientit = $Modeli->shfaqSipasIDs();
-if ($teDhenatKlientit == true) {
+if ($teDhenatKlientit == false) {
     echo '<script>document.location="../faqet/login.php"</script>';
     $_SESSION['nukJeLogin'] = true;
 }
-elseif($kontrollotedhenatDonator==true){
+elseif($kontrollotedhenatDonator==false){
     echo '<script>document.location="../faqet/signup.php"</script>';
 }
 ?>

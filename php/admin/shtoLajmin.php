@@ -12,16 +12,7 @@ if (!isset($_SESSION)) {
 
 
 if (isset($_POST['shtoLajmin'])) {
-/*
-          $_SESSION['titulli'] = $_POST['lajmiName'];
-          $_SESSION['pershkrimi'] = $_POST['pershkrimi'];
-          $_SESSION['fotolajmit'] = $_FILES['lajmiPhoto'];
-          $_SESSION['contentfoto'] =$_FILES['contentPhoto'];
-          $_SESSION['content'] = $_POST['content'];
-          $_SESSION['kategorialajmit'] = $_POST['kategoria'];
-          $_SESSION['emriFotosLajmit'] = $_FILES['lajmiPhoto']['name'];
-          $_SESSION['emriFotosLajmitContent'] = $_FILES['contentPhoto']['name'];
-          */
+
           $NewsCRUD->setTitulli($_POST['lajmiName']);
           $NewsCRUD->setPershkrimi($_POST['pershkrimi']);
           $NewsCRUD->setContent($_POST['content']);
@@ -46,11 +37,7 @@ if (isset($_POST['shtoLajmin'])) {
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vendosja e Produkteve</title>
-  <link rel="shortcut icon" href="../../img/web/favicon.ico" />
-  <link rel="stylesheet" href="../../css/header.css" />
-  <link rel="stylesheet" href="../../css/forms.css" />
-  <link rel="stylesheet" href="../../css/mesazhetStyle.css" />
+  <title>Vendosja e lajmeve</title>
 </head>
 
 <body>

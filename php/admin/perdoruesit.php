@@ -76,7 +76,7 @@ if (isset($_GET['userID'])) {
           echo '<td><input id="aksesi_' . $perdoruesi['id'] . '" type="number" min="0" max="2" placeholder="Aksesi" value="' . $perdoruesi['aksesi'] . '"></td>';
         }
         echo '<td><button class="edito" onclick="return ndryshoTeDhenat(' . $perdoruesi['id'] . '); ">Edito</button>
-              <button class="edito"><a href="../userPages/porosit.php?id=' . $perdoruesi['id'] . '">Porosite</a></button></td>
+              <button class="edito"><a href="../userPages/porosit.php?id=' . $perdoruesi['id'] . '">Terminet</a></button></td>
             </tr>';
 
       }
