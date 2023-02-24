@@ -1,10 +1,13 @@
 <?php
+require_once('../CRUD/Modeli.php');
+$Modeli = new Modeli();
 if (!isset($_SESSION)) {
     session_start();
 }
 if (!isset($_SESSION['id'])) {
     echo '<script>document.location="../faqet/login.php"</script>';
     $_SESSION['nukJeLogin'] = true;
+    
 }?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,19 +20,16 @@ if (!isset($_SESSION['id'])) {
 <body>
     
 <?php
-include('../includes/navbar.php');
-include_once('../CRUD/Modeli.php');
-$Modeli = new Modeli();
+
 
 $Modeli->setId($_SESSION['id']);
-$kontrollotedhenatDonator= $Modeli->kontrolloDonator();
 $teDhenatKlientit = $Modeli->shfaqSipasIDs();
-if ($teDhenatKlientit == false) {
-    echo '<script>document.location="../faqet/login.php"</script>';
-    $_SESSION['nukJeLogin'] = true;
-}
-elseif($kontrollotedhenatDonator==false){
-    echo '<script>document.location="../faqet/signup.php"</script>';
+echo '<script>document.location="regDonator.php?id=' . $teDhenatKlientit['id'] . '"</script>';
+
+    if(isset($teDhenatKlientit['id'])) {
+    echo '<script>document.location="regDonator.php?id=' . $teDhenatKlientit['id'] . '"</script>';
+
+
 }
 ?>
 </body>

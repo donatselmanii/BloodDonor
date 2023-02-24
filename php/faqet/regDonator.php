@@ -1,14 +1,18 @@
 <?php
-require_once('../adminFunksione/kontrolloAksesin.php');
 require_once('../CRUD/Modeli.php');
 require_once('../CRUD/kategoriaCRUDGrupi.php');
+
+if (!isset($_SESSION)) {
+    session_start();
+  }
+
 
 $kategoriaGrupi = new kategoriaCRUDGrupi();
 $Modeli = new Modeli();
 
-if (!isset($_SESSION)) {
-  session_start();
-}
+$Modeli->setId($_GET['id']);
+$donatori = $Modeli->shfaqSipasIDs();
+
 
 
 if (isset($_POST['UpdateUser'])) {
@@ -40,11 +44,13 @@ if (isset($_POST['UpdateUser'])) {
     <form name="UpdateUser" onsubmit="return validimiShtimiProduktit();" action='' method="POST"
       enctype="multipart/form-data">
       <?php
-      if (isset($_SESSION['DonationUinsertua'])) {
+      if (isset($_SESSION['tedhenatuinsertuan'])) {
         echo '
-                  <script>alert("Donacioni u shtua me sukses");</script>
+                  <script>alert("Te dhenat u shtuan me sukses!");</script>
             '; 
       }
+      
+      $donatori = $Modeli->shfaqSipasIDs();
       ?>
     
       <h1 class="form-title">Vendosja e te dhenave te nevojshme</h1>

@@ -53,7 +53,7 @@ if (!isset($_SESSION['aksesi'])) {
                         </li>';
                     } else {
                         echo '    
-                        <li><a href="../faqet/.php">Dashboard</a></li>
+                        <li><a href="../faqet/Donate.php">Dashboard</a></li>
                         
                         <li><a href="../funksione/logout.php">Log Out</a></li>';
                     }

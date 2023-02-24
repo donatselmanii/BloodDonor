@@ -17,8 +17,8 @@ if (isset($_POST['shtoDonacionin'])) {
 
           $DonationCRUD->setTitulli($_POST['donationName']);
           $DonationCRUD->setPershkrimi($_POST['pershkrimi']);
-          $DonationCRUD->setKategoriagrupit($_POST['kategoriaGrupi']);
-          $DonationCRUD->setKategoriaqytetit($_POST['kategoriaQyteti']);
+          $DonationCRUD->setKategoriagrupit($_POST['kategoriaGrupit']);
+          $DonationCRUD->setKategoriaqytetit($_POST['kategoriaQytetit']);
           $_SESSION['fotorequest'] = $_FILES['donationPhoto'];
 
           $DonationCRUD->InsertDonation();
@@ -50,7 +50,7 @@ if (isset($_POST['shtoDonacionin'])) {
       }
       ?>
     
-      <h1 class="form-title">Vendosja e Lajmit</h1>
+      <h1 class="form-title">Vendosja e Donacionit</h1>
       <input name="donationName" type="text" placeholder="Titulli i donacionit" required>
       <input name="pershkrimi" type="text" placeholder="Pershkrimi" required>
       <input name="donationPhoto" accept="image/*" type="file" value="Foto e Lajmit" required>

@@ -147,17 +147,27 @@ try{
 }
 
 // Inserto te dhenat tjera pas te dhenave te para 
-public function insertotherData($email,$kategoriagrupit, $semundjet,$pershkrimi){
+public function insertotherDataa($email,$kategoriagrupit,$semundjet,$pershkrimi){
     try{
     $sql = "UPDATE donator SET `email` = ?, `kategoriagrupit` = ?, `semundjet` = ?, `pershkrimi` = ? WHERE id = ?";
     $stm = $this->dbcon->prepare($sql);
-    $stm->execute([$this->$kategoriagrupit, $this->email, $this->$semundjet, $this->$pershkrimi, $this->nrleternjoftimit]);
+    $stm->execute([$this->$kategoriagrupit, $this->email, $this->$semundjet, $this->$pershkrimi, $this->id]);
     }
     catch(Exception $e){
     return $e->getMessage();
     }
+}
+public function insertotherData()
+    {
+        try {
+            $sql = "UPDATE donator set `email` = ?, `kategoriagrupit` = ?, `semundjet` = ?, `pershkrimi` = ? where id = ?";
+            $stm = $this->dbcon->prepare($sql);
+            $stm->execute([$this->email, $this->kategoriagrupit, $this->semundjet, $this->pershkrimi, $this->id]);
+            $_SESSION['Tedhenatuinsertuan'] = true;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
-    
 
     
     
@@ -196,24 +206,23 @@ public function insertotherData($email,$kategoriagrupit, $semundjet,$pershkrimi)
         }
     }
 
-//Metoda per shfaqjen e te gjithe te dhenave te studentit
-    public function shfaqDhenat(){
-        try{
-            //$sql = "SELECT * FROM Studenti";
-            $sql = "CALL GetAllStudnetet()";
-            $stm = $this->dbConn->prepare($sql);
+    public function shfaqiUserat(){
+        try {
+            $sql = "SELECT * FROM `donator`";
+            $stm = $this->dbcon->prepare($sql);
             $stm->execute();
-            $dhenat = $stm->fetchAll();
-            return $dhenat;
+  
+            return $stm->fetchAll();
+      
+        } catch (Exception $e) {
+            return $e->getMessage();
         }
-    catch(Exception $e){
-        return $e->getMessage();
-    }
-}
+       }
+  
 //Metoda per shfaqjen e te gjithe te dhenave te studentit
     public function shfaqSipasIDs(){
         try{
-            $sql = "SELECT * FROM Donator where id=?";
+            $sql = "SELECT * FROM donator where id=?";
             $stm = $this->dbcon->prepare($sql);
             $stm->execute([$this->id]);
             $dhenat = $stm->fetchAll();
