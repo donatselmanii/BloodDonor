@@ -4,28 +4,26 @@ require_once('../db/dbcon.php');
 if (!isset($_SESSION)) {
     session_start();
 }
-Class TerminiCRUD extends dbcon{
-    private $terminiID;
+Class AplikimiCRUD extends dbcon{
+    private $aplikmiID;
     private $donatoriID;
-    private $donationID;
-    private $dataTerminit;
+    private $dataAplikimit;
     private $kategoriaqytetit;
     private $statusiTerminit;
 
-    public function __construct($terminiID='',$donationID='',$donatoriID='',$dataTerminit='',$kategoriaqytetit='',$statusiTerminit=''){
-        $this->terminiID=$terminiID;
+    public function __construct($aplikmiID='',$donatoriID='',$dataAplikimit='',$kategoriaqytetit='',$statusiTerminit=''){
+        $this->aplikimiID=$aplikimiID;
         $this->donatoriID=$donatoriID;
-        $this->donationID=$donationID;
-        $this->dataTerminit=$dataTerminit;
+        $this->dataAplikimit=$dataAplikimit;
         $this->kategoriaqytetit=$kategoriaqytetit;
         $this->statusiTerminit=$statusiTerminit;
         $this->dbcon = $this->connDB();
     }
-    public function getTerminiID(){
-        return $this->terminiID;
+    public function getaplikimiID(){
+        return $this->aplikimiID;
     }
-    public function setTerminiID($terminiID){
-        $this->terminiID=$terminiID;
+    public function setaplikimiID($aplikimiID){
+        $this->aplikimiID=$aplikimiID;
     }
     public function getDonatoriID() {
         return $this->donatoriID;
@@ -33,13 +31,6 @@ Class TerminiCRUD extends dbcon{
     
       public function setDonatoriID($donatoriID) {
         $this->donatoriID = $donatoriID;
-      }
-      public function getDonationID() {
-        return $this->donationID;
-      }
-    
-      public function setDonationID($donationID) {
-        $this->donationID = $donationID;
       }
     
       public function getDataterminit() {
@@ -97,9 +88,9 @@ Class TerminiCRUD extends dbcon{
      public function shfaqTermininSipasID()
     {
         try {
-            $sql = "SELECT * FROM termini WHERE terminiID = ?";
+            $sql = "SELECT * FROM termini WHERE aplikimiID = ?";
             $stm = $this->dbcon->prepare($sql);
-            $stm->execute([$this->terminiID]);
+            $stm->execute([$this->aplikimiID]);
 
             return $stm->fetch();
         } catch (Exception $e) {
@@ -109,9 +100,9 @@ Class TerminiCRUD extends dbcon{
     public function konfirmoMesazhin()
     {
         try {
-            $sql = "UPDATE termini set statusiTerminit = 'Termini juaj eshte venodsur dhe aprovuar' where terminiID = ?";
+            $sql = "UPDATE termini set statusiTerminit = 'Termini juaj eshte venodsur dhe aprovuar' where aplikimiID = ?";
             $stm = $this->dbcon->prepare($sql);
-            $stm->execute([$this->terminiID]);
+            $stm->execute([$this->aplikimiID]);
 
             $_SESSION['mezashiUKonfirmua'] = true;
             echo '<script>document.location="../admin/terminet.php"</script>';
@@ -122,9 +113,9 @@ Class TerminiCRUD extends dbcon{
     public function konfirmoMesazhinUKRY()
     {
         try {
-            $sql = "UPDATE termini set statusiTerminit = 'Eshte kryer dhurimi i gjakut' where terminiID = ?";
+            $sql = "UPDATE termini set statusiTerminit = 'Eshte kryer dhurimi i gjakut' where aplikimiID = ?";
             $stm = $this->dbcon->prepare($sql);
-            $stm->execute([$this->terminiID]);
+            $stm->execute([$this->aplikimiID]);
 
             $_SESSION['mezashiUKonfirmua'] = true;
             echo '<script>document.location="../admin/terminet.php"</script>';
@@ -135,9 +126,9 @@ Class TerminiCRUD extends dbcon{
     public function fshijTermininSipasID(){
         try {
 
-            $sql = "DELETE FROM termini WHERE terminiID = ?";
+            $sql = "DELETE FROM termini WHERE aplikimiID = ?";
             $stm = $this->dbcon->prepare($sql);
-            $stm->execute([$this->terminiID]);
+            $stm->execute([$this->aplikimiID]);
 
             $_SESSION['mesazhiFshirjesMeSukses'] = true;
             echo '<script>document.location="../admin/terminet.php"</script>';
@@ -154,18 +145,6 @@ Class TerminiCRUD extends dbcon{
     } catch (Exception $e) {
         return $e->getMessage();
     }
-    }
-    public function shfaqTerminetUserit()
-    {
-        try {
-            $sql = "SELECT * from termini inner join donator on termini.donatoriID = donator.id where donator.id = ?;";
-            $stm = $this->dbcon->prepare($sql);
-            $stm->execute([$this->donatoriID]);
-
-            return $stm->fetch();
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
     }
 
 }

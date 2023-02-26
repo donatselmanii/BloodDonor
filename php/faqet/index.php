@@ -19,6 +19,12 @@ $TerminiCRUD= new TerminiCRUD();
     <link rel="icon" href="../../img/logo.png" type="image/icon">
     <link rel="stylesheet" href="../../css/blood-donor.css">
     <script src="https://kit.fontawesome.com/7be85ed243.js"></script>
+    <style>
+      .background-text a {
+    color: white;
+    text-decoration: none;
+}
+    </style>
 </head>
 <body>
     

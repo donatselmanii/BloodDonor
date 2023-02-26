@@ -27,6 +27,61 @@ if (isset($_GET['userID'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Perdoruesit</title>
+  <style>
+
+    
+.goBack {
+    color: white;
+    padding: 15px;
+    background-color: rgb(184,29,29);
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 300ms;
+    margin: 10px;
+}
+.goBack:hover {
+  background-color: rgba(184,29,29, 0.7);
+}
+    .containerDashboardP {
+    margin: 50px;
+}
+.containerDashboardP table {
+  display: flex;
+  justify-content: center;
+}
+.adminPageH1 {
+  color: rgb(184,29,29);
+  text-align:center;
+}
+.adminPagetable {
+  border: 1px solid rgb(176, 176, 176);
+  padding: 2px;
+  text-align: center;
+  border-radius: 6px
+}
+.adminPagetable input {
+  outline: none;
+}
+.adminPageTableHead {
+  color: white;
+  background-color: rgb(184,29,29);
+  font-weight: 100;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+}
+.adminPageTableButton {
+  background-color: rgb(184,29,29);
+  color: white;
+  padding: 10px;
+  border:none;
+}
+.adminPageTableButton a {
+  color: white;
+  text-decoration: none;
+}
+
+  </style>
 
 <body>
 
@@ -45,15 +100,15 @@ if (isset($_GET['userID'])) {
           ';
     }
     ?>
-    <h1>Lista e Perdoruesve</h1>
+    <h1 class="adminPageH1">Lista e Perdoruesve</h1>
     <table>
       <tr>
-        <th>ID</th>
-        <th>Emri</th>
-        <th>Mbiemri</th>
-        <th>Email</th>
-        <th>Aksesi</th>
-        <th>Funksione</th>
+        <th class="adminPageTableHead">ID</th>
+        <th class="adminPageTableHead">Emri</th>
+        <th class="adminPageTableHead">Mbiemri</th>
+        <th class="adminPageTableHead">Email</th>
+        <th class="adminPageTableHead">Aksesi</th>
+        <th class="adminPageTableHead">Funksione</th>
       </tr>
       <?php
       $perdoruesit = $Modeli->shfaqTeGjithePerdoruesit();
@@ -61,31 +116,29 @@ if (isset($_GET['userID'])) {
       foreach ($perdoruesit as $perdoruesi) {
         echo '
             <tr>
-              <td id="id_' . $perdoruesi['id'] . '">' . $perdoruesi['id'] . '</td>
-              <td><input id="emri_' . $perdoruesi['id'] . '" type="text" placeholder="Emri" value="' . $perdoruesi['emri'] . '"></td>
-              <td><input id="mbiemri_' . $perdoruesi['id'] . '" type="text" placeholder=""value="' . $perdoruesi['mbiemri'] . '"></td>
-              <td>' . $perdoruesi['email'] . '</td>';
+              <td class="adminPagetable" id="id_' . $perdoruesi['id'] . '">' . $perdoruesi['id'] . '</td>
+              <td class="adminPagetable" ><input id="emri_' . $perdoruesi['id'] . '" type="text" placeholder="Emri" value="' . $perdoruesi['emri'] . '"></td>
+              <td class="adminPagetable" ><input id="mbiemri_' . $perdoruesi['id'] . '" type="text" placeholder=""value="' . $perdoruesi['mbiemri'] . '"></td>
+              <td class="adminPagetable">' . $perdoruesi['email'] . '</td> ';
         if ($perdoruesi['aksesi'] == 2 && $_SESSION['aksesi'] != 2 || $perdoruesi['id'] == $_SESSION['id']) {
-          echo '<td id="aksesi_' . $perdoruesi['id'] . '">' . $perdoruesi['aksesi'] . '</td>';
+          echo '<td class="adminPagetable" id="aksesi_' . $perdoruesi['id'] . '">' . $perdoruesi['aksesi'] . '</td>';
         } else {
-          echo '<td><input id="aksesi_' . $perdoruesi['id'] . '" type="number" min="0" max="2" placeholder="Aksesi" value="' . $perdoruesi['aksesi'] . '"></td>';
+          echo '<td class="adminPagetable"><input id="aksesi_' . $perdoruesi['id'] . '" type="number" min="0" max="2" placeholder="Aksesi" value="' . $perdoruesi['aksesi'] . '"></td>';
         }
-        echo '<td><button class="edito" onclick="return ndryshoTeDhenat(' . $perdoruesi['id'] . '); ">Edito</button>
-              <button class="edito"><a href="../userPages/porosit.php?id=' . $perdoruesi['id'] . '">Terminet</a></button></td>
+        echo '<td><button class="adminPageTableButton" onclick="return ndryshoTeDhenat(' . $perdoruesi['id'] . '); ">Edito</button>
+              <button class="adminPageTableButton"><a href="../faqet/porosit.php?id=' . $perdoruesi['id'] . '">Terminet</a></button></td>
             </tr>';
-
       }
       ?>
-      </th>
     </table>
   </div>
 
+  <a href="dashboard.php" class="goBack">Go Back to Dashboard</a>
   <?php
-  include '../includes/footer.php';
   include('../funksione/skriptat.php') ?>
 </body>
 
-
+</html>
 
 <script>
   function ndryshoTeDhenat(idUser) {
@@ -120,9 +173,8 @@ if (isset($_GET['userID'])) {
     var link = "?kategoriaID=" + kategoriaID + "&fshij";
     window.location.href = link;
   }
-
 </script>
-</html>
+
 <?php
 unset($_SESSION['aksesiUPerditesua']);
 ?>

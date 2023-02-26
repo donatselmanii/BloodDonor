@@ -27,7 +27,7 @@ if (!isset($_SESSION['aksesi'])) {
                 if ($_SESSION['aksesi'] != 0) {
                     echo '
 
-                    <li><a href="../admin/dashboard.php"> admin </a></li>
+                    <li><a href="../admin/dashboard.php"> Admin </a></li>
 
                     ';
                     
@@ -53,7 +53,7 @@ if (!isset($_SESSION['aksesi'])) {
                         </li>';
                     } else {
                         echo '    
-                        <li><a href="../faqet/Donate.php">Dashboard</a></li>
+                        <li><a href="../faqet/dashboard.php">Dashboard</a></li>
                         
                         <li><a href="../funksione/logout.php">Log Out</a></li>';
                     }

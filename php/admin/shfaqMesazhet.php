@@ -17,37 +17,79 @@ $contactForm = $contactFormCRUD->shfaqMesazhet();
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shfaq Mesazhet</title>
+
+  <style>
+ .goBack {
+    color: white;
+    padding: 15px;
+    background-color: rgb(184,29,29);
+    text-decoration: none;
+    border-radius: 10px;
+    margin: 30px;
+    transition: 300ms;
+}
+.goBack:hover {
+  background-color: rgba(184,29,29, 0.7);
+}
+.containerDashboardP {
+    margin: 50px;
+}
+.containerDashboardP table {
+  display: flex;
+  justify-content: center;
+}
+.adminPageH1 {
+  color: rgb(184,29,29);
+  text-align:center;
+}
+.adminPagetable {
+  border: 1px solid rgb(176, 176, 176);
+  padding: 2px;
+  text-align: center;
+}
+.adminPageTableHead {
+  color: white;
+  background-color: rgb(184,29,29);
+  font-weight: 100;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+}
+.adminPageTableButton {
+  background-color: rgb(184,29,29);
+  color: white;
+  padding: 15px 13px;
+  border:none;
+}
+.adminPageTableButton a {
+  color: white;
+  text-decoration: none;
+}
+
+  </style>
 </head>
 
 <body>
-
-  <?php include '../includes/navbar.php' ?>
 
   <div class="containerDashboardP">
     <?php
     if (isset($_SESSION['mezashiUKonfirmua'])) {
       echo '
-                  <div class="mesazhiSuksesStyle">
-                    <p>Mesazhi u konfirmua me sukses!</p>
-                    <button id="mbyllMesazhin">
-                      X
-                    </button>
-                  </div>
+                  <script>alert("Mesazhi u konfirmua me sukses");</script>
             ';
-
     }
     ?>
-    <h1>Lista e Mesazheve</h1>
+    <h1 class="adminPageH1">Lista e Mesazheve</h1>
     <table>
       <tr>
-        <th>ID Mesazhi</th>
-        <th>Emri</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Mesazhi</th>
-        <th>Data e Dergeses</th>
-        <th>Statusi</th>
-        <th>Funksione</th>
+        <th class="adminPageTableHead">ID Mesazhi</th>
+        <th class="adminPageTableHead">Emri</th>
+        <th class="adminPageTableHead">Email</th>
+        <th class="adminPageTableHead">Phone</th>
+        <th class="adminPageTableHead">Mesazhi</th>
+        <th class="adminPageTableHead">Data e Dergeses</th>
+        <th class="adminPageTableHead">Statusi</th>
+        <th class="adminPageTableHead">Funksione</th>
       </tr>
       <?php
 
@@ -55,21 +97,21 @@ $contactForm = $contactFormCRUD->shfaqMesazhet();
       foreach ($contactForm as $mesazhi) {
         echo '
             <tr>
-              <td>' . $mesazhi['IDmesazhi'] . '</td>
-              <td>' . $mesazhi['emri'] . '</td>
-              <td>' . $mesazhi['email'] . '</td>
-              <td>' . $mesazhi['phone'] . '</td>
-              <td>' . $mesazhi['mesazhi'] . '</td>
-              <td>' . $mesazhi['datadergeses'] . '</td>
-              <td>' . $mesazhi['statusi'] . '</td>
-              <td><button class="edito"><a href="../adminFunksione/konfirmoMesazhin.php?IDmesazhi=' . $mesazhi['IDmesazhi'] . '">Konfirmo</a></button></td>
+              <td class="adminPagetable">' . $mesazhi['IDmesazhi'] . '</td>
+              <td class="adminPagetable">' . $mesazhi['emri'] . '</td>
+              <td class="adminPagetable">' . $mesazhi['email'] . '</td>
+              <td class="adminPagetable">' . $mesazhi['phone'] . '</td>
+              <td class="adminPagetable">' . $mesazhi['mesazhi'] . '</td>
+              <td class="adminPagetable">' . $mesazhi['datadergeses'] . '</td>
+              <td class="adminPagetable">' . $mesazhi['statusi'] . '</td>
+              <td><button class="adminPageTableButton"><a href="../adminFunksione/konfirmoMesazhin.php?IDmesazhi=' . $mesazhi['IDmesazhi'] . '">Konfirmo</a></button></td>
             </tr>
           ';
       }
       ?>
     </table>
-  </div>
-
+</div>
+<a href="dashboard.php" class="goBack">Go Back to Dashboard</a>
   <?php
   include('../funksione/skriptat.php') ?>
 </body>

@@ -32,7 +32,7 @@ Class DonationCRUD extends dbcon{
   public function setDonationID($donationID) {
       $this->donationID = $donationID;
   }
-
+  
   public function getTitulli() {
       return $this->titulli;
   }

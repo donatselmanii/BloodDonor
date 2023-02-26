@@ -16,26 +16,55 @@ $DonationCRUD = new DonationCRUD();
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lajmet</title>
+  <title>Kontrollo Donacionet</title>
+  <style>
+      .container-lajmi {
+   display: grid;
+   grid-template-columns: repeat(4, 1fr)
+}
+ .container-lajmi img {
+  width: 250px;
+  height: 250px;
+ }
+.lajmi-text h1 {
+  font-weight: 100;
+  color: rgb(184,29,29);
+  padding:5px;
+}
+.lajmi-each {
+  width: 250px;
+  box-shadow: 5px 5px 10px rgb(200,200,200)
+}
+.lajmi-each .button{
+ background-color: rgb(184,29,29);
+ border: none;
+ color: white;
+ margin: 5px;
+ padding: 5px;
+ border-radius: 5px;
+}
+.lajmi-each .button a {
+  color: white;
+  text-decoration: none;
+
+}
+  </style>
 </head>
 
 <body>
-  <div class="container">
-    <form class="searchBarForm" name='kerko' action='../funksione/search.php' method="post">
-      <input class="searchBar" name='kerkimi' type="search" placeholder="Search">
-    </form>
+  <div class="container-lajmi">
     <?php
     
       $donacionet = $DonationCRUD->shfaqiDonations();
       foreach ($donacionet as $donacioni) {
-        echo '<tr>
-                    <td><img src="../../img/donation/' . $donacioni['fotorequest'] . '" alt="" /></td>
-                    <td><p>' . $donacioni['titulli'] . '</p></td>
-                    <td><p>' . $donacioni['pershkrimi'] . '</p></td>
-                    <td><a href="./editoDonation.php?donationID=' . $donacioni['donationID'] . '"><button>Edito</button></a>
-                    <button class="fshij"><a href="../adminFunksione/fshiDonation.php?donationID=' . $donacioni['donationID'] . '">Fshij</a></button>
+        echo '<div class="lajmi-each">
+                    <div><img src="../../img/donation/' . $donacioni['fotorequest'] . '" alt="" /></div>
+                    <div><p>' . $donacioni['titulli'] . '</p></div>
+                    <div><p>' . $donacioni['pershkrimi'] . '</p></div>
+                    <div><a href="./editoDonation.php?donationID=' . $donacioni['donationID'] . '"><button class="button">Edito</button></a></div>
+                    <button class="button"><a href="../adminFunksione/fshiDonation.php?donationID=' . $donacioni['donationID'] . '">Fshij</a></button>
              
-                    </tr>';
+                    </div>';
       }
     ?>
   </div>

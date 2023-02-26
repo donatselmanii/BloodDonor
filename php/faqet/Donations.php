@@ -24,7 +24,6 @@ if (isset($_GET['donationID'])) {
 $kontrollotedhenatDonator= $Modeli->kontrolloDonator();
 $Modeli->setId($_SESSION['id']);
 if($kontrollotedhenatDonator==true){
-    
     echo '<script>document.location="regDonator.php?id=' . $kontrollotedhenatDonator['id'] . '"</script>';
 }
 ?>

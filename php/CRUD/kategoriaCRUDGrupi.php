@@ -111,7 +111,7 @@ class kategoriaCRUDGrupi extends dbcon
             $kategorit = $this->shfaqKategorin();
 
 
-            echo '<select class="dropdown1" name="kategoriaGrupit">
+            echo '<select class="form-input" name="kategoriaGrupit">
                 <option value="0+">Zgjedhni Kategorin</option>
             ';
             foreach ($kategorit as $kategoria) {
