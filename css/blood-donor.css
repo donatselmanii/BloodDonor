@@ -611,6 +611,9 @@ button:hover {
     padding: 10px;
     color: white;
 }
+
+
+
 @media (min-width: 2000px) {
    .background1, .background2 {
     height: 800px;

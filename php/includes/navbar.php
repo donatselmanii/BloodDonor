@@ -71,8 +71,6 @@ if (!isset($_SESSION['aksesi'])) {
 
             
         </nav>
-    </header>
-    <script src="../../js/hamburgerMenu.js"></script>
 </body>
 
 </html>

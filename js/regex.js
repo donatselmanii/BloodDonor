@@ -41,7 +41,7 @@ function validimiLogIn(){
       alert("Emri duhet te permbaje vetem shkronja!");
       FirstnameSF.focus();
       return false;
-    }
+    } 
     if(!LastNameRegex.test(LastNameSF)){
         alert("Mbiemri duhet te permbaje vetem shkronja!");
         LastNameSF.focus();

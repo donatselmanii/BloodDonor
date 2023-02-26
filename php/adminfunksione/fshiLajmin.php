@@ -7,7 +7,7 @@ require_once('../adminFunksione/kontrolloAksesAdmin.php');
 require_once('../CRUD/NewsCRUD.php');
 
 if (isset($_SESSION['skeAksesAdmin']) == true) {
-    echo '<script>document.location="../admin/index.php.php"</script>';
+    echo '<script>document.location="../admin/index.php"</script>';
 } else {
     $NewsCRUD = new NewsCRUD();
 

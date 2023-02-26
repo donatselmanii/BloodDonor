@@ -20,6 +20,7 @@ if (isset($_POST['UpdateUser'])) {
           $Modeli->setEmail($_POST['email']);
           $Modeli->setSemundjet($_POST['semundjet']);
           $Modeli->setPershkrimi($_POST['pershkrimi']);
+          $Modeli->setDatelindja($_POST['datelindja']);
           $Modeli->setKategoriagrupit($_POST['kategoriaGrupit']);
 
           $Modeli->insertotherData();
@@ -57,6 +58,7 @@ if (isset($_POST['UpdateUser'])) {
       <input name="email" type="text" placeholder="Email" required>
       <input name="semundjet" type="text" placeholder="Semundjet" required>
       <input name="pershkrimi" type="text" placeholder="Pershkrimi" required>
+      <input name="datelindja" type="date" required>
       <?php $kategoriaGrupi->shfaqKategorinSelektim(); ?>
       <input type="submit" value="Shtoni te dhenat" name='UpdateUser'>
       

@@ -147,11 +147,11 @@ try{
 }
 
 // Inserto te dhenat tjera pas te dhenave te para 
-public function insertotherDataa($email,$kategoriagrupit,$semundjet,$pershkrimi){
+public function insertotherDataa($email,$kategoriagrupit,$semundjet,$pershkrimi,$datelindja=''){
     try{
-    $sql = "UPDATE donator SET `email` = ?, `kategoriagrupit` = ?, `semundjet` = ?, `pershkrimi` = ? WHERE id = ?";
+    $sql = "UPDATE donator SET `email` = ?, `kategoriagrupit` = ?, `semundjet` = ?, `pershkrimi` = ?,`datelindja`=? WHERE id = ?";
     $stm = $this->dbcon->prepare($sql);
-    $stm->execute([$this->$kategoriagrupit, $this->email, $this->$semundjet, $this->$pershkrimi, $this->id]);
+    $stm->execute([$this->$kategoriagrupit, $this->email, $this->$semundjet, $this->$pershkrimi,$this->$datelindja, $this->id]);
     }
     catch(Exception $e){
     return $e->getMessage();

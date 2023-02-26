@@ -3,8 +3,10 @@ if (!isset($_SESSION)) {
     session_start();
 }
 require_once('../CRUD/NewsCRUD.php');
+require_once('../CRUD/TerminiCRUD.php');
 
 $NewsCRUD = new NewsCRUD();
+$TerminiCRUD= new TerminiCRUD();
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +39,8 @@ $NewsCRUD = new NewsCRUD();
                 <p>Dhuroni gjak ose plazmën për të bërë një ndryshim në këtë botë</p>
                 <h2>Edhe ti mund ta bësh këtë.</h2>
                 <button><a href="Donate.php">Dhuro gjak tani!</a></button>
-            </div>
+
+                </div>
         </div>
     </main>
     <div class="arrows">

@@ -26,11 +26,7 @@ if (isset($_GET['userID'])) {
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Perdoruesit | Tech Store</title>
-  <link rel="shortcut icon" href="../../img/web/favicon.ico" />
-  <link rel="stylesheet" href="../../css/adminDashboard.css" /> 
-  <link rel="stylesheet" href="../../css/mesazhetStyle.css" />
-</head>
+  <title>Perdoruesit</title>
 
 <body>
 
@@ -68,7 +64,6 @@ if (isset($_GET['userID'])) {
               <td id="id_' . $perdoruesi['id'] . '">' . $perdoruesi['id'] . '</td>
               <td><input id="emri_' . $perdoruesi['id'] . '" type="text" placeholder="Emri" value="' . $perdoruesi['emri'] . '"></td>
               <td><input id="mbiemri_' . $perdoruesi['id'] . '" type="text" placeholder=""value="' . $perdoruesi['mbiemri'] . '"></td>
-              <td>' . $perdoruesi['email'] . '</td>
               <td>' . $perdoruesi['email'] . '</td>';
         if ($perdoruesi['aksesi'] == 2 && $_SESSION['aksesi'] != 2 || $perdoruesi['id'] == $_SESSION['id']) {
           echo '<td id="aksesi_' . $perdoruesi['id'] . '">' . $perdoruesi['aksesi'] . '</td>';
@@ -90,7 +85,7 @@ if (isset($_GET['userID'])) {
   include('../funksione/skriptat.php') ?>
 </body>
 
-</html>
+
 
 <script>
   function ndryshoTeDhenat(idUser) {
@@ -125,8 +120,9 @@ if (isset($_GET['userID'])) {
     var link = "?kategoriaID=" + kategoriaID + "&fshij";
     window.location.href = link;
   }
-</script>
 
+</script>
+</html>
 <?php
 unset($_SESSION['aksesiUPerditesua']);
 ?>

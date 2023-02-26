@@ -137,14 +137,15 @@ Class DonationCRUD extends dbcon{
             $fileExt = explode('.', $emriFotos);
             $fileActualExt = strtolower(end($fileExt));
 
-            $teLejuara = array('jpg', 'jpeg', 'png');
+            $teLejuara = array('jpg', 'jpeg', 'png', 'svg');
 
             if (in_array($fileActualExt, $teLejuara)) {
                 if ($errorFoto === 0) {
-                    $_SESSION['emriUnikFotosDonation'] = uniqid('', true) . "." . $fileActualExt;
-                    $destinacioniFotos = '../../img/donation/' . $_SESSION['emriUnikFotosDonation'];
+                    $emriUnikFotosDonation = uniqid('', true) . "." . $fileActualExt;
+                    $destinacioniFotos = '../../img/donation/' . $emriUnikFotosDonation;
                     move_uploaded_file($emeriTempIFotes, $destinacioniFotos);
 
+                    $this->setFotorequest($emriUnikFotosDonation);
                 } else {
                     $_SESSION['problemNeBartje'] = true;
                 }
@@ -162,6 +163,21 @@ Class DonationCRUD extends dbcon{
             $stm->execute();
 
             return $stm->fetchAll();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+    public function fshijDonationSipasID(){
+        try {
+            $fotorequest = $this->shfaqDonationSipasID();
+            unlink('../../img/donation/' . $donacioni['fotorequest']);
+
+            $sql = "DELETE FROM donation WHERE donationID = ?";
+            $stm = $this->dbcon->prepare($sql);
+            $stm->execute([$this->donationID]);
+
+            $_SESSION['mesazhiFshirjesMeSukses'] = true;
+            echo '<script>document.location="../admin/adminDonation.php"</script>';
         } catch (Exception $e) {
             return $e->getMessage();
         }
